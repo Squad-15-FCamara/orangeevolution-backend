@@ -25,7 +25,7 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/courses")
 @RestController
 @AllArgsConstructor
-@Api(value = "Course HTTP methods")
+@Api(description = "Course HTTP methods", tags = "Courses")
 public class CourseController {
 	
     private CourseService courseService;
