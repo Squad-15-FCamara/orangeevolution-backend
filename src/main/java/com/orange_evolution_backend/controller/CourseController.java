@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.orange_evolution_backend.entity.Course;
 import com.orange_evolution_backend.service.CourseService;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 
@@ -22,6 +23,7 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/courses")
 @RestController
 @AllArgsConstructor
+@Api(value = "Course HTTP methods")
 public class CourseController {
     private CourseService courseService;
     

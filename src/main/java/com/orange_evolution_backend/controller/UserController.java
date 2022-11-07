@@ -18,6 +18,7 @@ import com.orange_evolution_backend.entity.User;
 import com.orange_evolution_backend.repository.UserRepository;
 import com.orange_evolution_backend.service.UserService;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 
@@ -25,6 +26,7 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/users")
 @RestController
 @AllArgsConstructor
+@Api(value = "User HTTP methods")
 public class UserController {
 
 	private UserService userService;
