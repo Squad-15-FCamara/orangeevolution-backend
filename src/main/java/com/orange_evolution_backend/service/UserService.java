@@ -31,4 +31,10 @@ public class UserService {
 						"Este usuário não existe!"));
 	}
 	
+	public User saveUser(User user) {
+		
+		userRepository.save(user);
+		return user;
+	}
+	
 }
