@@ -25,25 +25,28 @@ public class CourseController {
     private CourseService courseService;
 
     @GetMapping
-    public ResponseEntity<List<Course>> getAllCourses(){
+    public ResponseEntity<List<Course>> getAllCourses() {
         return ResponseEntity.ok(courseService.findAllCourses());
     }
+
     @GetMapping("/{idCourse}")
-    public ResponseEntity<Course> getCourseById(@PathVariable Long idCourse){
+    public ResponseEntity<Course> getCourseById(@PathVariable Long idCourse) {
         return ResponseEntity.ok(courseService.findCourseByID(idCourse));
     }
 
     @GetMapping("/{time}")
-    public ResponseEntity<List<Course>> getCoursesByTime(@PathVariable Long time){
+    public ResponseEntity<List<Course>> getCoursesByTime(@PathVariable Long time) {
         return ResponseEntity.ok(courseService.findCourseByTime(time));
     }
 
-    public ResponseEntity<List<Course>> getCoursesByTag(String tag){
+    @GetMapping("/{tag}")
+    public ResponseEntity<List<Course>> getCoursesByTag(@PathVariable String tag) {
         return ResponseEntity.ok(courseService.findCourseByTag(tag));
-        }
+    }
+
     @PostMapping
-    public ResponseEntity<Course> createCourse(@RequestBody Course course){
+    public ResponseEntity<Course> createCourse(@RequestBody Course course) {
         return new ResponseEntity<Course>(courseService.saveCourse(course), HttpStatus.CREATED);
-    } 
+    }
 
 }
