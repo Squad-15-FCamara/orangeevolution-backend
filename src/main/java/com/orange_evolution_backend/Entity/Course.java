@@ -23,14 +23,19 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "course_id")
     private Long id;
+
     @Column
     private String title;
+    
     @Column
-    private String time;
+    private Long time;
+    
     @Column
     private List<String> tags;
+    
     @Column
     private String link;
+    
     @Column
     private String description;
 }
