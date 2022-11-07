@@ -1,5 +1,6 @@
 package com.orange_evolution_backend.swagger;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import springfox.documentation.builders.PathSelectors;
@@ -10,9 +11,10 @@ import springfox.documentation.spring.web.plugins.Docket;
 @Configuration
 public class SwaggerConfig {
 	
+	@Bean
 	public Docket docket() {
 		
-		return new Docket (DocumentationType.SWAGGER_2)
+		return new Docket(DocumentationType.SWAGGER_2)
 				.select()
 				.apis(RequestHandlerSelectors.any())
 				.paths(PathSelectors.any())
