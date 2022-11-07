@@ -1,7 +1,5 @@
 package com.orange_evolution_backend.entity;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,7 +30,7 @@ public class Course {
     private Long time;
 
     @Column
-    private List<String> tags;
+    private String tags;
 
     @Column
     private String link;
