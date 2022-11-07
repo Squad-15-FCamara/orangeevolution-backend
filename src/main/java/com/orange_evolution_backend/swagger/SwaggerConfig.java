@@ -16,7 +16,7 @@ public class SwaggerConfig {
 		
 		return new Docket(DocumentationType.SWAGGER_2)
 				.select()
-				.apis(RequestHandlerSelectors.any())
+				.apis(RequestHandlerSelectors.basePackage("com.orange_evolution_backend.controller"))
 				.paths(PathSelectors.any())
 				.build();
 	}
