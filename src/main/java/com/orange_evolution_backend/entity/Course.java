@@ -1,4 +1,4 @@
-package com.orange_evolution_backend.Entity;
+package com.orange_evolution_backend.entity;
 
 import java.util.List;
 
@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,16 +27,16 @@ public class Course {
 
     @Column
     private String title;
-    
+
     @Column
     private Long time;
-    
+
     @Column
     private List<String> tags;
-    
+
     @Column
     private String link;
-    
+
     @Column
     private String description;
 }

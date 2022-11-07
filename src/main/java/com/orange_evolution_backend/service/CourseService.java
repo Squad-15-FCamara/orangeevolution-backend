@@ -1,4 +1,4 @@
-package com.orange_evolution_backend.Service;
+package com.orange_evolution_backend.service;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.orange_evolution_backend.Entity.Course;
-import com.orange_evolution_backend.Repository.CourseRepository;
+import com.orange_evolution_backend.entity.Course;
+import com.orange_evolution_backend.repository.CourseRepository;
 
 import lombok.AllArgsConstructor;
 
@@ -30,13 +30,12 @@ public class CourseService {
         return course;
     }
 
-    public List<Course> findCourseByTime(Long time){
+    public List<Course> findCourseByTime(Long time) {
         return courseRepository.findByTime(time);
     }
 
-    public List<Course> findCourseByTag(String tag){
+    public List<Course> findCourseByTag(String tag) {
         return courseRepository.findByTags(tag);
     }
-
 
 }

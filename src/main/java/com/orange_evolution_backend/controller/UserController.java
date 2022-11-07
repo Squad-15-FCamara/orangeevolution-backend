@@ -25,49 +25,49 @@ import lombok.AllArgsConstructor;
 @RestController
 @AllArgsConstructor
 public class UserController {
-	
+
 	private UserService userService;
 	private UserRepository userRepository;
-	
+
 	@GetMapping
 	public ResponseEntity<List<User>> getAllUsers() {
-		
+
 		return ResponseEntity.ok(userService.findAllUsers());
 	}
-	
+
 	@GetMapping("/{userId}")
 	public ResponseEntity<User> getUserById(@PathVariable Long userId) {
-		
+
 		return ResponseEntity.ok(userService.findUserById(userId));
 	}
-	
+
 	@PostMapping
 	public ResponseEntity<User> createUser(@RequestBody User user) {
-		
+
 		return new ResponseEntity<User>(userService.saveUser(user), HttpStatus.CREATED);
 	}
-	
+
 	@PutMapping("/{userId}")
 	public ResponseEntity<User> updateUser(@PathVariable Long userId, @RequestBody User user) {
 		if (!userRepository.existsById(userId)) {
 			return ResponseEntity.notFound().build();
 		}
-		
+
 		user.setId(userId);
 		user = userService.saveUser(user);
-		
+
 		return ResponseEntity.ok(user);
 	}
-	
+
 	@DeleteMapping("/{userId}")
 	public ResponseEntity<Void> deleteUser(@PathVariable Long userId) {
 		if (!userRepository.existsById(userId)) {
 			return ResponseEntity.notFound().build();
 		}
-		
+
 		userService.deleteUser(userId);
-		
+
 		return ResponseEntity.noContent().build();
 	}
-	
+
 }

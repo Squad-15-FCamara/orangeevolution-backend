@@ -1,4 +1,4 @@
-package com.orange_evolution_backend.Controller;
+package com.orange_evolution_backend.controller;
 
 import java.util.List;
 
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.orange_evolution_backend.Entity.Course;
-import com.orange_evolution_backend.Service.CourseService;
+import com.orange_evolution_backend.entity.Course;
+import com.orange_evolution_backend.service.CourseService;
 
 import lombok.AllArgsConstructor;
 
