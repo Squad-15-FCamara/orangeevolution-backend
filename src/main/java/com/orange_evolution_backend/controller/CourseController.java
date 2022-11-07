@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.orange_evolution_backend.entity.Course;
 import com.orange_evolution_backend.service.CourseService;
 
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 
 @CrossOrigin(origins = "*")
@@ -23,27 +24,32 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class CourseController {
     private CourseService courseService;
-
+    
+    @ApiOperation(value = "Fetch all courses")
     @GetMapping
     public ResponseEntity<List<Course>> getAllCourses() {
         return ResponseEntity.ok(courseService.findAllCourses());
     }
-
+    
+    @ApiOperation(value = "Fetch a course by ID")
     @GetMapping("/{idCourse}")
     public ResponseEntity<Course> getCourseById(@PathVariable Long idCourse) {
         return ResponseEntity.ok(courseService.findCourseByID(idCourse));
     }
-
+    
+    @ApiOperation(value = "Fetch a course by time atribute")
     @GetMapping("/{time}")
     public ResponseEntity<List<Course>> getCoursesByTime(@PathVariable Long time) {
         return ResponseEntity.ok(courseService.findCourseByTime(time));
     }
-
+    
+    @ApiOperation(value = "Fetch a course by tag")
     @GetMapping("/{tag}")
     public ResponseEntity<List<Course>> getCoursesByTag(@PathVariable String tag) {
         return ResponseEntity.ok(courseService.findCourseByTag(tag));
     }
-
+    
+    @ApiOperation(value = "Update a course")
     @PostMapping
     public ResponseEntity<Course> createCourse(@RequestBody Course course) {
         return new ResponseEntity<Course>(courseService.saveCourse(course), HttpStatus.CREATED);
