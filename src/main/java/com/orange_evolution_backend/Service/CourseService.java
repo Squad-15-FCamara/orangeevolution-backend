@@ -35,7 +35,7 @@ public class CourseService {
     }
 
     public List<Course> findCourseByTag(String tag){
-        return courseRepository.findByTags(tag);
+        return null;
     }
 
 
