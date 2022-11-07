@@ -38,6 +38,9 @@ public class CourseController {
         return ResponseEntity.ok(courseService.findCourseByTime(time));
     }
 
+    public ResponseEntity<List<Course>> getCoursesByTag(String tag){
+        return ResponseEntity.ok(courseService.findCourseByTag(tag));
+        }
     @PostMapping
     public ResponseEntity<Course> createCourse(@RequestBody Course course){
         return new ResponseEntity<Course>(courseService.saveCourse(course), HttpStatus.CREATED);
