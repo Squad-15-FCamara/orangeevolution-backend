@@ -34,7 +34,9 @@ public class CourseService {
         return courseRepository.findByTime(time);
     }
 
-
+    public List<Course> findCourseByTag(String tag){
+        return courseRepository.findByTags(tag);
+    }
 
 
 }
