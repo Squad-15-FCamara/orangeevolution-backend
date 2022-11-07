@@ -30,7 +30,9 @@ public class CourseService {
         return course;
     }
 
-    
+    public List<Course> findCourseByTime(Long time){
+        return courseRepository.findByTime(time);
+    }
 
 
 
