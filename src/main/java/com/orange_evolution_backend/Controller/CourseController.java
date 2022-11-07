@@ -33,8 +33,14 @@ public class CourseController {
         return ResponseEntity.ok(courseService.findCourseByID(idCourse));
     }
 
+    @GetMapping("/{time}")
+    public ResponseEntity<List<Course>> getCoursesByTime(@PathVariable Long time){
+        return ResponseEntity.ok(courseService.findCourseByTime(time));
+    }
+
     @PostMapping
     public ResponseEntity<Course> createCourse(@RequestBody Course course){
         return new ResponseEntity<Course>(courseService.saveCourse(course), HttpStatus.CREATED);
     } 
+
 }
