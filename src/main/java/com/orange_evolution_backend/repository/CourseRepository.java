@@ -9,5 +9,4 @@ import com.orange_evolution_backend.entity.Course;
 public interface CourseRepository extends JpaRepository<Course, Long> {
     public List<Course> findByTime(Long time);
 
-    public List<Course> findByTags(String tag);
 }

@@ -1,5 +1,6 @@
 package com.orange_evolution_backend.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -35,7 +36,13 @@ public class CourseService {
     }
 
     public List<Course> findCourseByTag(String tag) {
-        return courseRepository.findByTags(tag);
+        List<Course> returnCourse = new ArrayList<>();
+        findAllCourses().stream().forEach(course -> {
+            if(course.getTags().contains(tag)){
+                returnCourse.add(course);
+            }            
+        });
+        return returnCourse;
     }
 
 }
