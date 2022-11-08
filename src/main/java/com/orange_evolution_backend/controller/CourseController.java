@@ -86,7 +86,7 @@ public class CourseController {
         return new ResponseEntity<Course>(courseService.saveCourse(course), HttpStatus.CREATED);
     }
     @ApiOperation(value = "add a favorite course")
-    @PutMapping("/{userId}/{courseId}")
+    @GetMapping("/{userId}/{courseId}")
     public ResponseEntity<Void> addFavoriteCourse(@PathVariable Long userId, @PathVariable Long courseID ){
         courseService.favoriteCourse(userId, courseID);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
