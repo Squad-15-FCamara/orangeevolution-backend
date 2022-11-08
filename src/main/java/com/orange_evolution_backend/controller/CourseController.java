@@ -28,81 +28,80 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @Api(description = "Course HTTP methods", tags = "Courses")
 public class CourseController {
-	
+
     private CourseService courseService;
     private CourseRepository courseRepository;
-    
+
     @ApiOperation(value = "Fetch all courses")
     @GetMapping
     public ResponseEntity<List<Course>> getAllCourses() {
         return ResponseEntity.ok(courseService.findAllCourses());
     }
-    
+
     @ApiOperation(value = "Fetch a course by ID")
     @GetMapping("/{idCourse}")
     public ResponseEntity<Course> getCourseById(@PathVariable Long idCourse) {
         return ResponseEntity.ok(courseService.findCourseByID(idCourse));
     }
-    
+
     @ApiOperation(value = "Fetch a course by time atribute")
     @GetMapping("/times/{time}")
     public ResponseEntity<List<Course>> getCoursesByTime(@PathVariable Long time) {
         return ResponseEntity.ok(courseService.findCourseByTime(time));
     }
-    
+
     @ApiOperation(value = "Fetch a course by tag")
     @GetMapping("/tags/{tag}")
     public ResponseEntity<List<Course>> getCoursesByTag(@PathVariable String tag) {
         return ResponseEntity.ok(courseService.findCourseByTag(tag));
     }
+
     @ApiOperation(value = "Fetch a course by road")
     @GetMapping("/roads/{road}")
-    public ResponseEntity<List<Course>> getCoursesByRoad(@PathVariable String road){
+    public ResponseEntity<List<Course>> getCoursesByRoad(@PathVariable String road) {
         return ResponseEntity.ok(courseService.findCourseByRoad(road));
     }
 
     @ApiOperation(value = "Fetch a course by theme")
     @GetMapping("/themes/{theme}")
-    public ResponseEntity<List<Course>> getCoursesByTheme(@PathVariable String theme){
+    public ResponseEntity<List<Course>> getCoursesByTheme(@PathVariable String theme) {
         return ResponseEntity.ok(courseService.findCourseByTheme(theme));
     }
 
     @ApiOperation(value = "Fetch a course by author")
     @GetMapping("/authors/{author}")
-    public ResponseEntity<List<Course>> getCoursesByAuthor(@PathVariable String author){
+    public ResponseEntity<List<Course>> getCoursesByAuthor(@PathVariable String author) {
         return ResponseEntity.ok(courseService.findCoursesByAuthor(author));
     }
 
     @ApiOperation(value = "Fetch a course by type")
     @GetMapping("/types/{type}")
-    public ResponseEntity<List<Course>> getCoursesByType(@PathVariable String type){
+    public ResponseEntity<List<Course>> getCoursesByType(@PathVariable String type) {
         return ResponseEntity.ok(courseService.findCoursesByType(type));
     }
-
 
     @ApiOperation(value = "Create a course")
     @PostMapping
     public ResponseEntity<Course> createCourse(@RequestBody Course course) {
         return new ResponseEntity<Course>(courseService.saveCourse(course), HttpStatus.CREATED);
     }
+
     @ApiOperation(value = "add a favorite course")
-    @GetMapping("/{userId}/{courseId}")
-    public ResponseEntity<Void> addFavoriteCourse(@PathVariable Long userId, @PathVariable Long courseID ){
-        courseService.favoriteCourse(userId, courseID);
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    @GetMapping("/favorites/{userId}/{courseId}")
+    public ResponseEntity<Course> addFavoriteCourse(@PathVariable Long userId, @PathVariable Long courseID) {
+        return new ResponseEntity<Course>(courseService.favoriteCourse(userId, courseID),HttpStatus.ACCEPTED);
     }
 
     @ApiOperation(value = "Delete a course")
     @DeleteMapping("/{courseId}")
     public ResponseEntity<Void> deleteCourse(@PathVariable Long courseId) {
-		if (!courseRepository.existsById(courseId)) {
-			return ResponseEntity.notFound().build();
-		}
+        if (!courseRepository.existsById(courseId)) {
+            return ResponseEntity.notFound().build();
+        }
 
-        
-		courseService.deleteCourse(courseId);
+        courseService.deleteCourse(courseId);
 
-		return ResponseEntity.noContent().build();
-	}
+        return ResponseEntity.noContent().build();
+    }
 
 }
