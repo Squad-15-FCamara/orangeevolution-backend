@@ -32,7 +32,13 @@ public class CourseService {
     }
 
     public List<Course> findCourseByTime(Long time) {
-        return courseRepository.findByTime(time);
+        List<Course> returnCourse = new ArrayList<>();
+        findAllCourses().stream().forEach(course ->{
+            if(course.getTime() >= time){
+                returnCourse.add(course);
+            }
+        });
+        return returnCourse;
     }
 
     public List<Course> findCourseByTag(String tag) {
@@ -48,7 +54,7 @@ public class CourseService {
     public List<Course> findCourseByRoad(String road){
         return courseRepository.findByRoad(road);
     }
-    
+
     public List<Course> findCourseByTheme(String theme){
         return courseRepository.findByTheme(theme);
         }
