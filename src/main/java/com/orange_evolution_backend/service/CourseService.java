@@ -71,6 +71,7 @@ public class CourseService {
         return courseRepository.findByType(type);
     }
 
+
     public Course favoriteCourse(Long idUser, Long idCourse){
         Optional<User> userOpt = userRepository.findById(idUser);
         Optional<Course> courseOpt = courseRepository.findById(idCourse);
@@ -86,6 +87,7 @@ public class CourseService {
         return null;
     }
     
+
     public void deleteCourse(Long courseId) {
     	courseRepository.deleteById(courseId);
     }
