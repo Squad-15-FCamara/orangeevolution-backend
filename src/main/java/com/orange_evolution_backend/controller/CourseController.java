@@ -99,6 +99,7 @@ public class CourseController {
 			return ResponseEntity.notFound().build();
 		}
 
+        
 		courseService.deleteCourse(courseId);
 
 		return ResponseEntity.noContent().build();
