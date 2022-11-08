@@ -54,7 +54,18 @@ public class CourseController {
     public ResponseEntity<List<Course>> getCoursesByTag(@PathVariable String tag) {
         return ResponseEntity.ok(courseService.findCourseByTag(tag));
     }
-    
+    @ApiOperation(value = "Fetch a course by road")
+    @GetMapping("/{road}")
+    public ResponseEntity<List<Course>> getCoursesByRoad(@PathVariable String road){
+        return ResponseEntity.ok(courseService.findCourseByRoad(road));
+    }
+
+    @ApiOperation(value = "Fetch a course by theme")
+    @GetMapping("/{theme}")
+    public ResponseEntity<List<Course>> getCoursesByTheme(@PathVariable String theme){
+        return ResponseEntity.ok(courseService.findCourseByTheme(theme));
+    }
+
     @ApiOperation(value = "Create a course")
     @PostMapping
     public ResponseEntity<Course> createCourse(@RequestBody Course course) {
