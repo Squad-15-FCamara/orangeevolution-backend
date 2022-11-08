@@ -27,6 +27,12 @@ public class Course {
     private String title;
 
     @Column
+    private String road;
+    
+    @Column
+    private String theme;
+
+    @Column
     private Long time;
 
     @Column
