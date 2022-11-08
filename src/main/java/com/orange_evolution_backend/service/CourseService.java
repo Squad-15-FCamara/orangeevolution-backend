@@ -44,6 +44,14 @@ public class CourseService {
         });
         return returnCourse;
     }
+
+    public List<Course> findCourseByRoad(String road){
+        return courseRepository.findByRoad(road);
+    }
+    
+    public List<Course> findCourseByTheme(String theme){
+        return courseRepository.findByTheme(theme);
+        }
     
     public void deleteCourse(Long courseId) {
     	courseRepository.deleteById(courseId);
