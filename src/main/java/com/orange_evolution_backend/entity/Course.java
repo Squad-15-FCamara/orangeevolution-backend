@@ -58,6 +58,6 @@ public class Course {
     @ManyToMany
     @JoinTable(name = "favorite_courses",
     joinColumns = @JoinColumn(name = "course_id"),
-    inverseJoinColumns = @JoinColumn(name = "userId"))
-    Collection<User> users; 
+    inverseJoinColumns = @JoinColumn(name = "user_id"))
+    Collection<User> users;
 }
