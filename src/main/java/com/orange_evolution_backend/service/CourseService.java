@@ -66,7 +66,7 @@ public class CourseService {
     public List<Course> findCoursesByType(String type){
         return courseRepository.findByType(type);
     }
-    
+
     public void deleteCourse(Long courseId) {
     	courseRepository.deleteById(courseId);
     }

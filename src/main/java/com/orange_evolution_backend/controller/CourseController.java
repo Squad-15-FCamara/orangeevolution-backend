@@ -78,6 +78,7 @@ public class CourseController {
         return ResponseEntity.ok(courseService.findCoursesByType(type));
     }
 
+
     @ApiOperation(value = "Create a course")
     @PostMapping
     public ResponseEntity<Course> createCourse(@RequestBody Course course) {
