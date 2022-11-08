@@ -1,10 +1,15 @@
 package com.orange_evolution_backend.entity;
 
+import java.util.Collection;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -49,4 +54,10 @@ public class Course {
 
     @Column
     private String description;
+
+    @ManyToMany
+    @JoinTable(name = "favorite_courses",
+    joinColumns = @JoinColumn(name = "course_id"),
+    inverseJoinColumns = @JoinColumn(name = "userId"))
+    Collection<User> users; 
 }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,36 +45,36 @@ public class CourseController {
     }
     
     @ApiOperation(value = "Fetch a course by time atribute")
-    @GetMapping("/{time}")
+    @GetMapping("/times/{time}")
     public ResponseEntity<List<Course>> getCoursesByTime(@PathVariable Long time) {
         return ResponseEntity.ok(courseService.findCourseByTime(time));
     }
     
     @ApiOperation(value = "Fetch a course by tag")
-    @GetMapping("/{tag}")
+    @GetMapping("/tags/{tag}")
     public ResponseEntity<List<Course>> getCoursesByTag(@PathVariable String tag) {
         return ResponseEntity.ok(courseService.findCourseByTag(tag));
     }
     @ApiOperation(value = "Fetch a course by road")
-    @GetMapping("/{road}")
+    @GetMapping("/roads/{road}")
     public ResponseEntity<List<Course>> getCoursesByRoad(@PathVariable String road){
         return ResponseEntity.ok(courseService.findCourseByRoad(road));
     }
 
     @ApiOperation(value = "Fetch a course by theme")
-    @GetMapping("/{theme}")
+    @GetMapping("/themes/{theme}")
     public ResponseEntity<List<Course>> getCoursesByTheme(@PathVariable String theme){
         return ResponseEntity.ok(courseService.findCourseByTheme(theme));
     }
 
     @ApiOperation(value = "Fetch a course by author")
-    @GetMapping("/{author}")
+    @GetMapping("/authors/{author}")
     public ResponseEntity<List<Course>> getCoursesByAuthor(@PathVariable String author){
         return ResponseEntity.ok(courseService.findCoursesByAuthor(author));
     }
 
     @ApiOperation(value = "Fetch a course by type")
-    @GetMapping("/{type}")
+    @GetMapping("/types/{type}")
     public ResponseEntity<List<Course>> getCoursesByType(@PathVariable String type){
         return ResponseEntity.ok(courseService.findCoursesByType(type));
     }
@@ -84,7 +85,13 @@ public class CourseController {
     public ResponseEntity<Course> createCourse(@RequestBody Course course) {
         return new ResponseEntity<Course>(courseService.saveCourse(course), HttpStatus.CREATED);
     }
-    
+    @ApiOperation(value = "add a favorite course")
+    @PutMapping("/{userId}/{courseId}")
+    public ResponseEntity<Void> addFavoriteCourse(@PathVariable Long userId, @PathVariable Long courseID ){
+        courseService.favoriteCourse(userId, courseID);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
+
     @ApiOperation(value = "Delete a course")
     @DeleteMapping("/{courseId}")
     public ResponseEntity<Void> deleteCourse(@PathVariable Long courseId) {
