@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -83,7 +84,13 @@ public class CourseController {
     public ResponseEntity<Course> createCourse(@RequestBody Course course) {
         return new ResponseEntity<Course>(courseService.saveCourse(course), HttpStatus.CREATED);
     }
-    
+    @ApiOperation(value = "add a favorite course")
+    @PutMapping("/{userId}/{courseId}")
+    public ResponseEntity<Void> addFavoriteCourse(@PathVariable Long userId, @PathVariable Long courseID ){
+        courseService.favoriteCourse(userId, courseID);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
+
     @ApiOperation(value = "Delete a course")
     @DeleteMapping("/{courseId}")
     public ResponseEntity<Void> deleteCourse(@PathVariable Long courseId) {
