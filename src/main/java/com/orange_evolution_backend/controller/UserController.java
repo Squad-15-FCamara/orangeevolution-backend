@@ -26,7 +26,7 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/users")
 @RestController
 @AllArgsConstructor
-@Api(value = "User HTTP methods")
+@Api(description = "User HTTP methods", tags = "Users")
 public class UserController {
 
 	private UserService userService;

@@ -44,5 +44,9 @@ public class CourseService {
         });
         return returnCourse;
     }
+    
+    public void deleteCourse(Long courseId) {
+    	courseRepository.deleteById(courseId);
+    }
 
 }
