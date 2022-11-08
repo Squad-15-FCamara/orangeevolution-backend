@@ -33,6 +33,12 @@ public class Course {
     private String theme;
 
     @Column
+    private String type;
+
+    @Column 
+    private String author;
+
+    @Column
     private Long time;
 
     @Column
