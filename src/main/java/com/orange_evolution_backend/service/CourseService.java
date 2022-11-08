@@ -59,6 +59,14 @@ public class CourseService {
         return courseRepository.findByTheme(theme);
         }
     
+    public List<Course> findCoursesByAuthor(String author){
+        return courseRepository.findByauthor(author);
+    }
+
+    public List<Course> findCoursesByType(String type){
+        return courseRepository.findByType(type);
+    }
+
     public void deleteCourse(Long courseId) {
     	courseRepository.deleteById(courseId);
     }

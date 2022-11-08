@@ -66,6 +66,19 @@ public class CourseController {
         return ResponseEntity.ok(courseService.findCourseByTheme(theme));
     }
 
+    @ApiOperation(value = "Fetch a course by author")
+    @GetMapping("/{author}")
+    public ResponseEntity<List<Course>> getCoursesByAuthor(@PathVariable String author){
+        return ResponseEntity.ok(courseService.findCoursesByAuthor(author));
+    }
+
+    @ApiOperation(value = "Fetch a course by type")
+    @GetMapping("/{type}")
+    public ResponseEntity<List<Course>> getCoursesByType(@PathVariable String type){
+        return ResponseEntity.ok(courseService.findCoursesByType(type));
+    }
+
+
     @ApiOperation(value = "Create a course")
     @PostMapping
     public ResponseEntity<Course> createCourse(@RequestBody Course course) {
