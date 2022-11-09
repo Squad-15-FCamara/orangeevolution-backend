@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -49,12 +50,12 @@ public class User {
 	@Column
 	private Boolean isAdmin;
 	
-	@ManyToMany(mappedBy = "users")
+	@ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
 	private Collection<Course> courses;
 
-	@ManyToMany(mappedBy = "userDoing")
+	@ManyToMany(mappedBy = "userDoing", fetch = FetchType.EAGER)
 	private Collection<Course> courseDoing;
 
-	@ManyToMany(mappedBy = "userDone")
+	@ManyToMany(mappedBy = "userDone", fetch = FetchType.EAGER)
 	private Collection<Course> courseDone;
 }
