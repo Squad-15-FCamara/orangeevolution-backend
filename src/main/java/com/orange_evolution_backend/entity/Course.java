@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,31 +29,48 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "course_id")
     private Long id;
-
+    
+    @Size(max = 60)
+	@NotBlank
     @Column
     private String title;
-
+    
+    @Size(max = 40)
+	@NotBlank
     @Column
     private String road;
     
+    @Size(max = 40)
+	@NotBlank
     @Column
     private String theme;
-
+    
+    @Size(max = 40)
+	@NotBlank
     @Column
     private String type;
-
+    
+    @Size(max = 40)
+	@NotBlank
     @Column 
     private String author;
-
+    
+    @NotBlank
     @Column
     private Long time;
-
+    
+    @Size(max = 100)
+	@NotBlank
     @Column
     private String tags;
-
+    
+    @Size(max = 60)
+	@NotBlank
     @Column
     private String link;
-
+    
+    @Size(max = 255)
+	@NotBlank
     @Column
     private String description;
 
