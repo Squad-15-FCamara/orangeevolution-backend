@@ -9,6 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,15 +29,23 @@ public class User {
 	@Column(name = "user_id")
 	private Long id;
 	
+	@Size(max = 60)
+	@NotBlank
 	@Column
 	private String name;
 	
+	@Size(max = 100)
+	@NotBlank
+	@Email
 	@Column
 	private String email;
 	
+	@Size(max = 60)
+	@NotBlank
 	@Column
 	private String actualJob;
 	
+	@NotBlank
 	@Column
 	private Boolean isAdmin;
 	
