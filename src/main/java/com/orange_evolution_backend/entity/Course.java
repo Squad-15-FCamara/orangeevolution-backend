@@ -78,11 +78,17 @@ public class Course {
     @JoinTable(name = "favorite_courses",
     joinColumns = @JoinColumn(name = "course_id"),
     inverseJoinColumns = @JoinColumn(name = "user_id"))
-    Collection<User> users;
+    private Collection<User> users;
 
     @ManyToMany
     @JoinTable(name = "doing",
     joinColumns = @JoinColumn(name = "course_id"),
     inverseJoinColumns = @JoinColumn(name = "user_id"))
-    Collection<User> userDoing;
+    private Collection<User> userDoing;
+
+    @ManyToMany
+    @JoinTable(name = "done",
+    joinColumns = @JoinColumn(name = "course_id"),
+    inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private Collection<User> userDone;
 }

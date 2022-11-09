@@ -51,4 +51,10 @@ public class User {
 	
 	@ManyToMany(mappedBy = "users")
 	private Collection<Course> courses;
+
+	@ManyToMany(mappedBy = "userDoing")
+	private Collection<Course> courseDoing;
+
+	@ManyToMany(mappedBy = "userDone")
+	private Collection<Course> courseDone;
 }
