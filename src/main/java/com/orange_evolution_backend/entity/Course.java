@@ -79,4 +79,10 @@ public class Course {
     joinColumns = @JoinColumn(name = "course_id"),
     inverseJoinColumns = @JoinColumn(name = "user_id"))
     Collection<User> users;
+
+    @ManyToMany
+    @JoinTable(name = "doing",
+    joinColumns = @JoinColumn(name = "course_id"),
+    inverseJoinColumns = @JoinColumn(name = "user_id"))
+    Collection<User> userDoing;
 }
