@@ -87,8 +87,8 @@ public class CourseController {
 
     @ApiOperation(value = "add a favorite course")
     @GetMapping("/favorites/{userId}/{courseId}")
-    public ResponseEntity<Course> addFavoriteCourse(@PathVariable Long userId, @PathVariable Long courseID) {
-        return ResponseEntity.ok(courseService.favoriteCourse(userId, courseID));
+    public ResponseEntity<Course> addFavoriteCourse(@PathVariable Long userId, @PathVariable Long courseId) {
+        return ResponseEntity.ok(courseService.favoriteCourse(userId, courseId));
     }
 
     @ApiOperation(value = "Delete a course")
