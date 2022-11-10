@@ -17,16 +17,20 @@ public class StatisticAdminService {
         return (long) courseRepository.findById(idCourse).get().getUserDoing().size();
     }
 
-    public Long CounterUserDone(Long idcourse) {
+    public Long counterUserDone(Long idcourse) {
         return (long) courseRepository.findById(idcourse).get().getUserDone().size();
     }
 
-    public Long CounterUserDidnt(Long idCourse) {
+    public Long counterUserDidnt(Long idCourse) {
         return (long) (userRepository.findAll().size() - (courseRepository.findById(idCourse).get().getUserDone().size()
                 + courseRepository.findById(idCourse).get().getUserDoing().size()));
     }
 
-    public Long CounterAllUsers(){
+    public Long counterAllUsers(){
         return (long) userRepository.findAll().size();
+    }
+
+    public Long counterAllCourses(){
+        return (long) courseRepository.findAll().size();
     }
 }

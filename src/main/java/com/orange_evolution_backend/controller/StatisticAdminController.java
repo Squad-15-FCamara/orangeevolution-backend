@@ -31,18 +31,18 @@ public class StatisticAdminController {
     @ApiOperation(value = "Count Users done a course")
     @GetMapping("/courseDone/{idCourse}")
     public ResponseEntity<Long> countUserDoneCourseByIdCourse(@PathVariable Long idCourse) {
-        return ResponseEntity.ok(statisticAdminService.CounterUserDone(idCourse));
+        return ResponseEntity.ok(statisticAdminService.counterUserDone(idCourse));
     }
 
     @ApiOperation(value = "Count Users didnt a course")
     @GetMapping("/courseDidnt/{idCourse}")
     public ResponseEntity<Long> countUserDidntCourseByIdCourse(@PathVariable Long idCourse) {
-        return ResponseEntity.ok(statisticAdminService.CounterUserDidnt(idCourse));
+        return ResponseEntity.ok(statisticAdminService.counterUserDidnt(idCourse));
     }
 
     @ApiOperation(value = "Count all users")
     @GetMapping("/counterUser")
     public ResponseEntity<Long> countAllUser(){
-        return ResponseEntity.ok(statisticAdminService.CounterAllUsers());
+        return ResponseEntity.ok(statisticAdminService.counterAllUsers());
     }
 }
