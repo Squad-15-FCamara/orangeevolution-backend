@@ -62,5 +62,16 @@ public class StatisticService {
         return doingCourses;
     }
 
+    public Course doneCourse(Long idUser, Long idCourse){
+        Optional<User> userOpt = userRepository.findById(idUser);
+        Optional<Course> courseOpt = courseRepository.findById(idCourse);
+        if(userOpt.isPresent() && courseOpt.isPresent()){
+            Course course = courseOpt.get();
+            course.getUserDone().add(userOpt.get());
+            return courseRepository.save(course);
+        }
+        return null;
+    }
+
 
 }
