@@ -2,14 +2,12 @@ package com.orange_evolution_backend.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.orange_evolution_backend.entity.Course;
-import com.orange_evolution_backend.entity.User;
 import com.orange_evolution_backend.repository.CourseRepository;
 import com.orange_evolution_backend.repository.UserRepository;
 
@@ -70,23 +68,6 @@ public class CourseService {
     public List<Course> findCoursesByType(String type){
         return courseRepository.findByType(type);
     }
-
-
-    public Course favoriteCourse(Long idUser, Long idCourse){
-        Optional<User> userOpt = userRepository.findById(idUser);
-        Optional<Course> courseOpt = courseRepository.findById(idCourse);
-
-        if(userOpt.isPresent() && courseOpt.isPresent()){
-            Course course = courseOpt.get();
-            course.getUsers().add(userOpt.get());
-
-            return course;
-            
-        }
-
-        return null;
-    }
-    
 
     public void deleteCourse(Long courseId) {
     	courseRepository.deleteById(courseId);
