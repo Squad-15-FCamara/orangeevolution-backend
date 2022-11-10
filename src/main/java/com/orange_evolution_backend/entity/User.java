@@ -12,6 +12,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
@@ -35,7 +36,7 @@ public class User {
 	@Column
 	private String name;
 	
-	@Size(max = 100)
+	@Size(max = 200)
 	@NotBlank
 	@Email
 	@Column
@@ -46,16 +47,16 @@ public class User {
 	@Column
 	private String actualJob;
 	
-	@NotBlank
+	@NotNull
 	@Column
 	private Boolean isAdmin;
 	
 	@ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
 	private Collection<Course> courses;
 
-	@ManyToMany(mappedBy = "userDoing", fetch = FetchType.EAGER)
+	@ManyToMany(mappedBy = "userDoing")
 	private Collection<Course> courseDoing;
 
-	@ManyToMany(mappedBy = "userDone", fetch = FetchType.EAGER)
+	@ManyToMany(mappedBy = "userDone")
 	private Collection<Course> courseDone;
 }

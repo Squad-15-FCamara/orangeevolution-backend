@@ -13,6 +13,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
@@ -56,7 +57,7 @@ public class Course {
     @Column 
     private String author;
     
-    @NotBlank
+    @NotNull
     @Column
     private Long time;
     
@@ -65,7 +66,7 @@ public class Course {
     @Column
     private String tags;
     
-    @Size(max = 60)
+    @Size(max = 200)
 	@NotBlank
     @Column
     private String link;
@@ -81,13 +82,13 @@ public class Course {
     inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Collection<User> users;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     @JoinTable(name = "doing",
     joinColumns = @JoinColumn(name = "course_id"),
     inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Collection<User> userDoing;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     @JoinTable(name = "done",
     joinColumns = @JoinColumn(name = "course_id"),
     inverseJoinColumns = @JoinColumn(name = "user_id"))
