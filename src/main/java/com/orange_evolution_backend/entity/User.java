@@ -51,7 +51,7 @@ public class User {
 	@Column
 	private Boolean isAdmin;
 	
-	@ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
+	@ManyToMany(mappedBy = "users")
 	private Collection<Course> courses;
 
 	@ManyToMany(mappedBy = "userDoing")
