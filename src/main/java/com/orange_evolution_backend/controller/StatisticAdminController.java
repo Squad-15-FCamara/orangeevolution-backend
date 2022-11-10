@@ -24,13 +24,19 @@ public class StatisticAdminController {
 
     @ApiOperation(value = "Count Users doing a Course")
     @GetMapping("/courseDoing/{idCourse}")
-    public ResponseEntity<Long> countUserdoingCourseByIdCourse(@PathVariable Long idCourse){
+    public ResponseEntity<Long> countUserdoingCourseByIdCourse(@PathVariable Long idCourse) {
         return ResponseEntity.ok(statisticAdminService.counterUserDoing(idCourse));
     }
-    
+
     @ApiOperation(value = "Count Users done a course")
     @GetMapping("/courseDone/{idCourse}")
-    public ResponseEntity<Long> countUserDoneCourseByIdCourse (@PathVariable Long idCourse){
+    public ResponseEntity<Long> countUserDoneCourseByIdCourse(@PathVariable Long idCourse) {
         return ResponseEntity.ok(statisticAdminService.CounterUserDone(idCourse));
+    }
+
+    @ApiOperation(value = "Count Users didnt a course")
+    @GetMapping("/courseDidnt/{idCourse}")
+    public ResponseEntity<Long> countUserDidntCourseByIdCourse(@PathVariable Long idCourse) {
+        return ResponseEntity.ok(statisticAdminService.CounterUserDidnt(idCourse));
     }
 }
