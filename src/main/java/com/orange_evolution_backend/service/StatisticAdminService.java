@@ -17,4 +17,7 @@ public class StatisticAdminService {
         return (long) courseRepository.findById(idCourse).get().getUserDoing().size() ;
     }
     
+    public Long CounterUserDone(Long idcourse){
+        return (long) courseRepository.findById(idcourse).get().getUserDone().size();
+    }
 }
