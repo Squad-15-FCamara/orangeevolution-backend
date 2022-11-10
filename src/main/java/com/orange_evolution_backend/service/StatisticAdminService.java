@@ -25,4 +25,8 @@ public class StatisticAdminService {
         return (long) (userRepository.findAll().size() - (courseRepository.findById(idCourse).get().getUserDone().size()
                 + courseRepository.findById(idCourse).get().getUserDoing().size()));
     }
+
+    public Long CounterAllUsers(){
+        return (long) userRepository.findAll().size();
+    }
 }
