@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -36,10 +37,9 @@ public class Course {
     @Column
     private String title;
     
-    @Size(max = 40)
-	@NotBlank
-    @Column
-    private String road;
+    @ManyToOne()
+    @JoinColumn(name = "road_Id")
+    private Road road;
     
     @Size(max = 40)
 	@NotBlank
