@@ -20,7 +20,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 
 @CrossOrigin(origins = "*")
-@RequestMapping("statistics")
+@RequestMapping("/statistics")
 @AllArgsConstructor
 @RestController
 @Api(description = "Statistic HTTP methods", tags = "Statistics")
