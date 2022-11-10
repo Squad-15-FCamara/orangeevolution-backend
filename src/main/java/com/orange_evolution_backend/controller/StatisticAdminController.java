@@ -39,4 +39,10 @@ public class StatisticAdminController {
     public ResponseEntity<Long> countUserDidntCourseByIdCourse(@PathVariable Long idCourse) {
         return ResponseEntity.ok(statisticAdminService.CounterUserDidnt(idCourse));
     }
+
+    @ApiOperation(value = "Count all users")
+    @GetMapping("/counterUser")
+    public ResponseEntity<Long> countAllUser(){
+        return ResponseEntity.ok(statisticAdminService.CounterAllUsers());
+    }
 }
