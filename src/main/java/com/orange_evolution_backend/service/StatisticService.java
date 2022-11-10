@@ -68,6 +68,7 @@ public class StatisticService {
         if(userOpt.isPresent() && courseOpt.isPresent()){
             Course course = courseOpt.get();
             course.getUserDone().add(userOpt.get());
+            course.getUserDoing().remove(userOpt.get());
             return courseRepository.save(course);
         }
         return null;
