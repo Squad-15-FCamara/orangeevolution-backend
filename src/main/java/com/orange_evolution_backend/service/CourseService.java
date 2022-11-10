@@ -45,12 +45,20 @@ public class CourseService {
 
     public List<Course> findCourseByTag(String tag) {
         List<Course> returnCourse = new ArrayList<>();
-        findAllCourses().stream().forEach(course -> {
+        findAllCourses().forEach(course -> {
             if(course.getTags().contains(tag)){
                 returnCourse.add(course);
             }            
-        });
-        return returnCourse;
+        });return returnCourse;
+    }
+
+    public List<Course> findCourseByTitle(String title){
+        List<Course> returnCourse = new ArrayList<>();
+        findAllCourses().forEach(course ->{
+            if(course.getTitle().contains(title)){
+                returnCourse.add(course);
+            }
+        }); return returnCourse;
     }
 
     public List<Course> findCourseByRoad(String road){
