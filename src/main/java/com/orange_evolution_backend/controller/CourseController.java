@@ -91,6 +91,13 @@ public class CourseController {
         return ResponseEntity.ok(converToListDTO(courses));
     }
 
+    @ApiOperation(value = "Fetch a course by title")
+    @GetMapping("titles/{title}")
+    public ResponseEntity<List<CourseDTO>> getCoursesByTitle(@PathVariable String title){
+        List<Course> courses = courseService.findCourseByTitle(title);
+        return ResponseEntity.ok(converToListDTO(courses));
+    }
+
     @ApiOperation(value = "Create a course")
     @PostMapping
     public ResponseEntity<CourseDTO> createCourse(@RequestBody CourseDTO courseDTO) {
