@@ -43,7 +43,14 @@ public class StatisticController {
         List<Course> returnCourses = statisticService.findFavoritesCoursesByIdUser(userId);
         return ResponseEntity.ok(converToListDTO(returnCourses));
     }
-    
+
+    @ApiOperation(value = "add a Doing course")
+    @GetMapping("/doing/{userId}/{courseId}")
+    public ResponseEntity<CourseDTO> addDoingCourse(@PathVariable Long userId, @PathVariable Long courseId){
+        Course returnCourse = statisticService.doingCourse(userId, courseId);
+        return ResponseEntity.ok(convertToDTO(returnCourse));
+    }
+
 
     private List<CourseDTO> converToListDTO(List<Course> courses){
         List<CourseDTO> returnCoursesDTO = new ArrayList<>();
