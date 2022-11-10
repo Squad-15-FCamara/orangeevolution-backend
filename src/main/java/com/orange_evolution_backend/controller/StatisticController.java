@@ -37,6 +37,14 @@ public class StatisticController {
         return ResponseEntity.ok(convertToDTO(returnCourse));
     }
 
+    @ApiOperation(value = "Fetch favorites courses by idUser")
+    @GetMapping("/favorites/courses/{userId}")
+    public ResponseEntity<List<CourseDTO>> findFavoritesCoursesByIdUser(@PathVariable Long userId){
+        List<Course> returnCourses = statisticService.findFavoritesCoursesByIdUser(userId);
+        return ResponseEntity.ok(converToListDTO(returnCourses));
+    }
+    
+
     private List<CourseDTO> converToListDTO(List<Course> courses){
         List<CourseDTO> returnCoursesDTO = new ArrayList<>();
         courses.forEach(course ->{
