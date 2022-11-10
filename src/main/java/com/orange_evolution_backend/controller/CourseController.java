@@ -92,7 +92,7 @@ public class CourseController {
     }
 
     @ApiOperation(value = "Fetch a course by title")
-    @GetMapping("titles/{title}")
+    @GetMapping("/titles/{title}")
     public ResponseEntity<List<CourseDTO>> getCoursesByTitle(@PathVariable String title){
         List<Course> courses = courseService.findCourseByTitle(title);
         return ResponseEntity.ok(converToListDTO(courses));
