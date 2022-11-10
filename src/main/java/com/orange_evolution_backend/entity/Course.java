@@ -45,10 +45,9 @@ public class Course {
     @JoinColumn(name = "theme_Id")
     private Theme theme;
     
-    @Size(max = 40)
-	@NotBlank
-    @Column
-    private String type;
+    @ManyToOne()
+    @JoinColumn(name = "type_Id")
+    private Type type;
     
     @Size(max = 40)
 	@NotBlank
