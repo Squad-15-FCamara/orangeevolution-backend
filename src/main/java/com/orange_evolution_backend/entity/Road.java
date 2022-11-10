@@ -30,7 +30,7 @@ public class Road {
     @Column
     private String name;
 
-    @OneToMany(mappedBy = "course")
+    @OneToMany(mappedBy = "road")
     private Collection<Course> courses;
 
 }

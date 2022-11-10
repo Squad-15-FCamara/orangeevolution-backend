@@ -41,10 +41,9 @@ public class Course {
     @JoinColumn(name = "road_Id")
     private Road road;
     
-    @Size(max = 40)
-	@NotBlank
-    @Column
-    private String theme;
+    @ManyToOne()
+    @JoinColumn(name = "theme_Id")
+    private Theme theme;
     
     @Size(max = 40)
 	@NotBlank
