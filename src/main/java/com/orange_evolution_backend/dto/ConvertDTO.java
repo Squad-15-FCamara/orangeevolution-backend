@@ -6,6 +6,9 @@ import java.util.List;
 import org.modelmapper.ModelMapper;
 
 import com.orange_evolution_backend.entity.Course;
+import com.orange_evolution_backend.entity.Road;
+import com.orange_evolution_backend.entity.Theme;
+import com.orange_evolution_backend.entity.Type;
 import com.orange_evolution_backend.entity.User;
 
 import lombok.AllArgsConstructor;
@@ -46,6 +49,28 @@ public class ConvertDTO {
     }
     public User converUserToEntity(UserDTO userDTO){
         return modelMapper.map(userDTO, User.class);
+    }
+
+    public RoadDTO convertRoadToDTO(Road road){
+        return modelMapper.map(road, RoadDTO.class);
+    }
+
+    public Road convertRoadToEntity(RoadDTO roadDTO){
+        return modelMapper.map(roadDTO, Road.class);
+    }
+
+    public ThemeDTO convertThemeToDTO(Theme theme){
+        return modelMapper.map(theme, ThemeDTO.class);
+    }
+    public Theme convertThemeToEntity(ThemeDTO themeDTO){
+        return modelMapper.map(themeDTO, Theme.class);
+    }
+
+    public TypeDTO convertTypeToDTO(Type type){
+        return modelMapper.map(type, TypeDTO.class);
+    }
+    public Type convertTypeToEntity(TypeDTO typeDTO){
+        return modelMapper.map(typeDTO, Type.class );
     }
 
 }
