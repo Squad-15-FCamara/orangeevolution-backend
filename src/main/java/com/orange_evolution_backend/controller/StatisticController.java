@@ -65,6 +65,13 @@ public class StatisticController {
         return ResponseEntity.ok(convertToDTO(returnCourse));
     }
 
+    @ApiOperation(value = "Fetch done courses by idUser")
+    @GetMapping("/done/courses/{userId}")
+    public ResponseEntity<List<CourseDTO>> findDoneCoursesByIdUser(@PathVariable Long userId){
+        List<Course> returnCourses = statisticService.findDoneCourseByIdUser(userId);
+        return ResponseEntity.ok(converToListDTO(returnCourses));
+    }
+
     private List<CourseDTO> converToListDTO(List<Course> courses){
         List<CourseDTO> returnCoursesDTO = new ArrayList<>();
         courses.forEach(course ->{
