@@ -36,8 +36,8 @@ public class StatisticService {
     
     
     public List<Course> findFavoritesCoursesByIdUser(Long idUser){
-        User userFavorite = userRepository.findById(idUser).get();
-        List<Course> favoritCourses = (List<Course>) userFavorite.getCourses() ;
+        User user = userRepository.findById(idUser).get();
+        List<Course> favoritCourses = (List<Course>) user.getCourses() ;
 
         return favoritCourses;
     }
@@ -53,6 +53,13 @@ public class StatisticService {
         }
 
         return null;
+    }
+
+    public List<Course> findDoingCoursesByIdUser(Long idUser){
+        User user = userRepository.findById(idUser).get();
+        List<Course> doingCourses = (List<Course>) user.getCourses();
+
+        return doingCourses;
     }
 
 
