@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 public class CourseDTO {
     private Long id;
     private String title;
-    private String road;
-    private String theme;
-    private String type;
+    private Long idRoad;
+    private Long idTheme;
+    private Long idType;
     private String author;
     private Long time;
     private String tags;
