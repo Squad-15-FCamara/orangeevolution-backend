@@ -1,7 +1,9 @@
 package com.orange_evolution_backend.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.orange_evolution_backend.dto.UserDTO;
 import com.orange_evolution_backend.entity.User;
 import com.orange_evolution_backend.repository.UserRepository;
 import com.orange_evolution_backend.service.UserService;
@@ -31,39 +34,41 @@ public class UserController {
 
 	private UserService userService;
 	private UserRepository userRepository;
+	private ModelMapper modelMapper;
 	
 	@ApiOperation(value = "Fetch all users")
 	@GetMapping
-	public ResponseEntity<List<User>> getAllUsers() {
-
-		return ResponseEntity.ok(userService.findAllUsers());
+	public ResponseEntity<List<UserDTO>> getAllUsers() {
+		List<User> users = userService.findAllUsers();
+		return ResponseEntity.ok(converToListDTO(users));
 	}
 	
 	@ApiOperation(value = "Fetch an user by ID")
 	@GetMapping("/{userId}")
-	public ResponseEntity<User> getUserById(@PathVariable Long userId) {
-
-		return ResponseEntity.ok(userService.findUserById(userId));
+	public ResponseEntity<UserDTO> getUserById(@PathVariable Long userId) {
+		User user = userService.findUserById(userId);
+		return ResponseEntity.ok(convertToDTO(user));
 	}
 	
 	@ApiOperation(value = "Create and save an user")
 	@PostMapping
-	public ResponseEntity<User> createUser(@RequestBody User user) {
-
-		return new ResponseEntity<User>(userService.saveUser(user), HttpStatus.CREATED);
+	public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
+		User user = converToEntity(userDTO);
+		User saved = userService.saveUser(user);
+		return new ResponseEntity<UserDTO>(convertToDTO(saved), HttpStatus.CREATED);
 	}
 	
 	@ApiOperation(value = "Update an user")
 	@PutMapping("/{userId}")
-	public ResponseEntity<User> updateUser(@PathVariable Long userId, @RequestBody User user) {
+	public ResponseEntity<UserDTO> updateUser(@PathVariable Long userId, @RequestBody UserDTO userDTO) {
 		if (!userRepository.existsById(userId)) {
 			return ResponseEntity.notFound().build();
 		}
-
+		User user = converToEntity(userDTO);
 		user.setId(userId);
 		user = userService.saveUser(user);
 
-		return ResponseEntity.ok(user);
+		return ResponseEntity.ok(convertToDTO(user));
 	}
 	
 	@ApiOperation(value = "Delete an user")
@@ -77,5 +82,20 @@ public class UserController {
 
 		return ResponseEntity.noContent().build();
 	}
+
+	private List<UserDTO> converToListDTO(List<User> users){
+        List<UserDTO> returnUsersDTO = new ArrayList<>();
+        users.forEach(user ->{
+            returnUsersDTO.add(modelMapper.map(user, UserDTO.class));
+        });
+        return returnUsersDTO;
+    }
+
+    private UserDTO convertToDTO(User user){
+        return modelMapper.map(user, UserDTO.class);
+    }
+    private User converToEntity(UserDTO userDTO){
+        return modelMapper.map(userDTO, User.class);
+    }
 
 }

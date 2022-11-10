@@ -37,8 +37,9 @@ public class CourseController {
 
     @ApiOperation(value = "Fetch all courses")
     @GetMapping
-    public ResponseEntity<List<Course>> getAllCourses() {
-        return ResponseEntity.ok(courseService.findAllCourses());
+    public ResponseEntity<List<CourseDTO>> getAllCourses() {
+        List<Course> courses = courseService.findAllCourses();
+        return ResponseEntity.ok(converToListDTO(courses));
     }
 
     @ApiOperation(value = "Fetch a course by ID")
