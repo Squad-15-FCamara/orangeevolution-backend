@@ -41,4 +41,19 @@ public class StatisticService {
 
         return favoritCourses;
     }
+
+    public Course doingCourse(Long idUser, Long idCourse){
+        Optional<User> userOpt = userRepository.findById(idUser);
+        Optional<Course> courseOpt = courseRepository.findById(idCourse);
+
+        if(userOpt.isPresent() && courseOpt.isPresent()){
+            Course course = courseOpt.get();
+            course.getUserDoing().add(userOpt.get());
+            return courseRepository.save(course);
+        }
+
+        return null;
+    }
+
+
 }
