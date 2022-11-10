@@ -1,5 +1,6 @@
 package com.orange_evolution_backend.controller;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -8,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.orange_evolution_backend.dto.RoadDTO;
+import com.orange_evolution_backend.dto.ThemeDTO;
+import com.orange_evolution_backend.dto.TypeDTO;
 import com.orange_evolution_backend.entity.Road;
 import com.orange_evolution_backend.entity.Theme;
 import com.orange_evolution_backend.entity.Type;
@@ -25,21 +29,52 @@ import lombok.AllArgsConstructor;
 public class AdminController {
     AdminService adminService;
 
+    ModelMapper modelMapper;
+
     @ApiOperation(value = "save a new Road")
-    @PostMapping("/road")
-    public ResponseEntity<Road> createRoad(@RequestBody Road road){
-        return new ResponseEntity<Road>(adminService.saveRoad(road), HttpStatus.CREATED);
+    @PostMapping("/roads")
+    public ResponseEntity<RoadDTO> createRoad(@RequestBody RoadDTO roadDTO){
+        Road road = convertRoadToEntity(roadDTO);
+        Road saved = adminService.saveRoad(road);
+        return new ResponseEntity<RoadDTO>(convertRoadToDTO(saved), HttpStatus.CREATED);
     }
 
     @ApiOperation(value = "save a new Theme")
-    @PostMapping("/theme")
-    public ResponseEntity<Theme> createTheme(@RequestBody Theme theme){
-        return new ResponseEntity<Theme>(adminService.saveTheme(theme), HttpStatus.CREATED);
+    @PostMapping("/themes")
+    public ResponseEntity<ThemeDTO> createTheme(@RequestBody ThemeDTO themeDTO){
+        Theme theme = convertThemeToEntity(themeDTO);
+        Theme saved = adminService.saveTheme(theme);
+        return new ResponseEntity<ThemeDTO>(convertThemeToDTO(saved), HttpStatus.CREATED);
     }
 
     @ApiOperation(value = "save a new Type")
-    @PostMapping("/type")
-    public ResponseEntity<Type> createType(@RequestBody Type type){
-        return new ResponseEntity<Type>(adminService.saveType(type), HttpStatus.CREATED);
+    @PostMapping("/types")
+    public ResponseEntity<TypeDTO> createType(@RequestBody TypeDTO typeDTO){
+        Type type = convertTypeToEntity(typeDTO);
+        Type saved = adminService.saveType(type);
+        return new ResponseEntity<TypeDTO>(convertTypeToDTO(saved), HttpStatus.CREATED);
     }
+
+    public RoadDTO convertRoadToDTO(Road road){
+        return modelMapper.map(road, RoadDTO.class);
+    }
+
+    public Road convertRoadToEntity(RoadDTO roadDTO){
+        return modelMapper.map(roadDTO, Road.class);
+    }
+
+    public ThemeDTO convertThemeToDTO(Theme theme){
+        return modelMapper.map(theme, ThemeDTO.class);
+    }
+    public Theme convertThemeToEntity(ThemeDTO themeDTO){
+        return modelMapper.map(themeDTO, Theme.class);
+    }
+
+    public TypeDTO convertTypeToDTO(Type type){
+        return modelMapper.map(type, TypeDTO.class);
+    }
+    public Type convertTypeToEntity(TypeDTO typeDTO){
+        return modelMapper.map(typeDTO, Type.class );
+    }
+    
 }
