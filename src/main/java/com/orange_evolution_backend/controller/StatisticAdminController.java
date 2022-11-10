@@ -45,4 +45,10 @@ public class StatisticAdminController {
     public ResponseEntity<Long> countAllUser(){
         return ResponseEntity.ok(statisticAdminService.counterAllUsers());
     }
+
+    @ApiOperation(value = "Count all courses")
+    @GetMapping("/counterCourses")
+    public ResponseEntity<Long> countAllCoursers(){
+        return ResponseEntity.ok(statisticAdminService.counterAllCourses());
+    }
 }
