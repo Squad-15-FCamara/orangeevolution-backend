@@ -28,4 +28,9 @@ public class StatisticAdminController {
         return ResponseEntity.ok(statisticAdminService.counterUserDoing(idCourse));
     }
     
+    @ApiOperation(value = "Count Users done a course")
+    @GetMapping("/courseDone/{idCourse}")
+    public ResponseEntity<Long> countUserDoneCourseByIdCourse (@PathVariable Long idCourse){
+        return ResponseEntity.ok(statisticAdminService.CounterUserDone(idCourse));
+    }
 }
