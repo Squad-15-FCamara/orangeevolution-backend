@@ -64,6 +64,12 @@ public class AdminController {
         return ResponseEntity.ok(adminService.findListNameRoad());
     }
 
+    @ApiOperation(value ="Fetch a names of themes")
+    @GetMapping("/themes/names")
+    public ResponseEntity<List<String>> getAllNamesThemes(){
+        return ResponseEntity.ok(adminService.findListNameTheme());
+    }
+
     
 
     private RoadDTO convertRoadToDTO(Road road){

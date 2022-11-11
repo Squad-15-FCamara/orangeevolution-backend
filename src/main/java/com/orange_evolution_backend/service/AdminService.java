@@ -50,6 +50,10 @@ public class AdminService {
         return roadRepoistory.findAll();
     }
 
+    public List<Theme> findAllThemes(){
+        return themeRepository.findAll();
+    }
+
     public List<Course> findAllCoursesByRoad(String road) {
         return (List<Course>) roadRepoistory.findByName(road).getCourses();
     }
@@ -63,9 +67,18 @@ public class AdminService {
     }
 
     public List<String> findListNameRoad(){
-        List<String> nameList = new ArrayList();
+        List<String> nameList = new ArrayList<>();
         findAllRoads().forEach(road ->{
             nameList.add(road.getName());
+        });
+
+        return nameList;
+    }
+
+    public List<String> findListNameTheme(){
+        List<String> nameList = new ArrayList<>();
+        findAllThemes().forEach(theme ->{
+            nameList.add(theme.getName());
         });
 
         return nameList;
