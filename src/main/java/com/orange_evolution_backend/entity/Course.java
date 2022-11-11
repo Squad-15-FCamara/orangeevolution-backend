@@ -32,7 +32,7 @@ public class Course {
     @Column(name = "course_id")
     private Long id;
     
-    @Size(max = 60)
+    @Size(max = 200)
 	@NotBlank
     @Column
     private String title;
