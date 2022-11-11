@@ -54,51 +54,55 @@ public class CourseController {
 
     @ApiOperation(value = "Fetch a course by time atribute")
     @GetMapping("/times/{time}")
-    public ResponseEntity<List<CourseDTO>> getCoursesByTime(@PathVariable Long time) {
+    public ResponseEntity<List<CourseStingDTO>> getCoursesByTime(@PathVariable Long time) {
         List<Course> courses = courseService.findCourseByTime(time);
-        return ResponseEntity.ok(converCoursesToListDTO(courses));
+        return ResponseEntity.ok(converCoursesStringToListDTO(courses));
     }
 
     @ApiOperation(value = "Fetch a course by tag")
     @GetMapping("/tags/{tag}")
-    public ResponseEntity<List<CourseDTO>> getCoursesByTag(@PathVariable String tag) {
+    public ResponseEntity<List<CourseStingDTO>> getCoursesByTag(@PathVariable String tag) {
         List<Course> courses = courseService.findCourseByTag(tag);
-        return ResponseEntity.ok(converCoursesToListDTO(courses));
+        return ResponseEntity.ok(converCoursesStringToListDTO(courses));
     }
 
     @ApiOperation(value = "Fetch a course by road")
     @GetMapping("/roads/{road}")
-    public ResponseEntity<List<CourseDTO>> getCoursesByRoad(@PathVariable String road) {
+
+    public ResponseEntity<List<CourseStingDTO>> getCoursesByRoad(@PathVariable String road) {
         List<Course> courses = adminService.findAllCoursesByRoad(road);
-        return ResponseEntity.ok(converCoursesToListDTO(courses));
+        return ResponseEntity.ok(converCoursesStringToListDTO(courses));
+
     }
 
     @ApiOperation(value = "Fetch a course by theme")
     @GetMapping("/themes/{theme}")
-    public ResponseEntity<List<CourseDTO>> getCoursesByTheme(@PathVariable String theme) {
+    public ResponseEntity<List<CourseStingDTO>> getCoursesByTheme(@PathVariable String theme) {
         List<Course> courses = adminService.findAllCoursesByTheme(theme);
-        return ResponseEntity.ok(converCoursesToListDTO(courses));
+        return ResponseEntity.ok(converCoursesStringToListDTO(courses));
+
     }
 
     @ApiOperation(value = "Fetch a course by author")
     @GetMapping("/authors/{author}")
-    public ResponseEntity<List<CourseDTO>> getCoursesByAuthor(@PathVariable String author) {
+    public ResponseEntity<List<CourseStingDTO>> getCoursesByAuthor(@PathVariable String author) {
         List<Course> courses = courseService.findCoursesByAuthor(author);
-        return ResponseEntity.ok(converCoursesToListDTO(courses));
+        return ResponseEntity.ok(converCoursesStringToListDTO(courses));
     }
 
     @ApiOperation(value = "Fetch a course by type")
     @GetMapping("/types/{type}")
-    public ResponseEntity<List<CourseDTO>> getCoursesByType(@PathVariable String type) {
+
+    public ResponseEntity<List<CourseStingDTO>> getCoursesByType(@PathVariable String type) {
         List<Course> courses = adminService.findAllCoursesByType(type);
-        return ResponseEntity.ok(converCoursesToListDTO(courses));
+        return ResponseEntity.ok(converCoursesStringToListDTO(courses));
     }
 
     @ApiOperation(value = "Fetch a course by title")
     @GetMapping("/titles/{title}")
-    public ResponseEntity<List<CourseDTO>> getCoursesByTitle(@PathVariable String title){
+    public ResponseEntity<List<CourseStingDTO>> getCoursesByTitle(@PathVariable String title){
         List<Course> courses = courseService.findCourseByTitle(title);
-        return ResponseEntity.ok(converCoursesToListDTO(courses));
+        return ResponseEntity.ok(converCoursesStringToListDTO(courses));
     }
 
     @ApiOperation(value = "Create a course")

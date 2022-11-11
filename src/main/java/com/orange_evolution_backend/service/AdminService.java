@@ -97,6 +97,7 @@ public class AdminService {
             nameList.add(type.getName());
         });
         return nameList;
+
     }
 
 }

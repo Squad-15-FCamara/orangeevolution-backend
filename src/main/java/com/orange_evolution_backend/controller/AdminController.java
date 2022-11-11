@@ -58,6 +58,7 @@ public class AdminController {
         return new ResponseEntity<TypeDTO>(convertTypeToDTO(saved), HttpStatus.CREATED);
     }
 
+
     @ApiOperation(value = "Fetch all names of Roads")
     @GetMapping("/roads/names")
     public ResponseEntity<List<String>> getAllNamesRoads(){
