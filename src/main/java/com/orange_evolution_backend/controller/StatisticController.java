@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.orange_evolution_backend.dto.CourseDTO;
+import com.orange_evolution_backend.dto.CourseStingDTO;
 import com.orange_evolution_backend.entity.Course;
+import com.orange_evolution_backend.service.AdminService;
 import com.orange_evolution_backend.service.StatisticService;
 
 import io.swagger.annotations.Api;
@@ -29,49 +31,50 @@ public class StatisticController {
 
     StatisticService statisticService;
     ModelMapper modelMapper;
+    AdminService adminService;
 
 
 
     @ApiOperation(value = "add a favorite course")
     @GetMapping("/favorites/{userId}/{courseId}")
-    public ResponseEntity<CourseDTO> addFavoriteCourse(@PathVariable Long userId, @PathVariable Long courseId) {
+    public ResponseEntity<CourseStingDTO> addFavoriteCourse(@PathVariable Long userId, @PathVariable Long courseId) {
         Course returnCourse = statisticService.favoriteCourse(userId, courseId);
-        return ResponseEntity.ok(convertCourseToDTO(returnCourse));
+        return ResponseEntity.ok(convertCourseStringDTO(returnCourse));
     }
 
     @ApiOperation(value = "Fetch favorites courses by idUser")
     @GetMapping("/favorites/courses/{userId}")
-    public ResponseEntity<List<CourseDTO>> findFavoritesCoursesByIdUser(@PathVariable Long userId){
+    public ResponseEntity<List<CourseStingDTO>> findFavoritesCoursesByIdUser(@PathVariable Long userId){
         List<Course> returnCourses = statisticService.findFavoritesCoursesByIdUser(userId);
-        return ResponseEntity.ok(converCoursesToListDTO(returnCourses));
+        return ResponseEntity.ok(converCoursesStringToListDTO(returnCourses));
     }
 
     @ApiOperation(value = "add a Doing course")
     @GetMapping("/doing/{userId}/{courseId}")
-    public ResponseEntity<CourseDTO> addDoingCourse(@PathVariable Long userId, @PathVariable Long courseId){
+    public ResponseEntity<CourseStingDTO> addDoingCourse(@PathVariable Long userId, @PathVariable Long courseId){
         Course returnCourse = statisticService.doingCourse(userId, courseId);
-        return ResponseEntity.ok(convertCourseToDTO(returnCourse));
+        return ResponseEntity.ok(convertCourseStringDTO(returnCourse));
     }
 
     @ApiOperation(value = "Fetch doing courses by idUser")
     @GetMapping("/doing/courses/{userId}")
-    public ResponseEntity<List<CourseDTO>> findDoingCoursesByIdUser(@PathVariable Long userId){
+    public ResponseEntity<List<CourseStingDTO>> findDoingCoursesByIdUser(@PathVariable Long userId){
         List<Course> returnCourse = statisticService.findDoingCoursesByIdUser(userId);
-        return ResponseEntity.ok(converCoursesToListDTO(returnCourse));
+        return ResponseEntity.ok(converCoursesStringToListDTO(returnCourse));
     }
 
     @ApiOperation(value = "add a Done course")
     @GetMapping("/done/{userId}/{courseId}")
-    public ResponseEntity<CourseDTO> addDoneCourse(@PathVariable Long userId, @PathVariable Long courseId){
+    public ResponseEntity<CourseStingDTO> addDoneCourse(@PathVariable Long userId, @PathVariable Long courseId){
         Course returnCourse = statisticService.doneCourse(userId, courseId);
-        return ResponseEntity.ok(convertCourseToDTO(returnCourse));
+        return ResponseEntity.ok(convertCourseStringDTO(returnCourse));
     }
 
     @ApiOperation(value = "Fetch done courses by idUser")
     @GetMapping("/done/courses/{userId}")
-    public ResponseEntity<List<CourseDTO>> findDoneCoursesByIdUser(@PathVariable Long userId){
+    public ResponseEntity<List<CourseStingDTO>> findDoneCoursesByIdUser(@PathVariable Long userId){
         List<Course> returnCourses = statisticService.findDoneCourseByIdUser(userId);
-        return ResponseEntity.ok(converCoursesToListDTO(returnCourses));
+        return ResponseEntity.ok(converCoursesStringToListDTO(returnCourses));
     }
 
     public List<CourseDTO> converCoursesToListDTO(List<Course> courses){
@@ -87,5 +90,27 @@ public class StatisticController {
     }
     public Course converCourseToEntity(CourseDTO courseDTO){
         return modelMapper.map(courseDTO, Course.class);
+    }
+
+    public List<CourseStingDTO> converCoursesStringToListDTO(List<Course> courses){
+        List<CourseStingDTO> returnCoursesDTO = new ArrayList<>();
+        courses.forEach(course ->{
+            CourseStingDTO courseStingDTO = modelMapper.map(course, CourseStingDTO.class);
+            CourseDTO courseDTO = modelMapper.map(course,CourseDTO.class);
+            courseStingDTO.setIdRoad(adminService.nameRoad(courseDTO.getIdRoad()));
+            courseStingDTO.setIdTheme(adminService.nameTheme(courseDTO.getIdTheme()));
+            courseStingDTO.setIdType(adminService.nameType(courseDTO.getIdType()));
+            returnCoursesDTO.add(courseStingDTO);
+        });
+        return returnCoursesDTO;
+    }
+
+    public CourseStingDTO convertCourseStringDTO(Course course){
+        CourseStingDTO courseStingDTO = modelMapper.map(course, CourseStingDTO.class);
+        CourseDTO courseDTO = modelMapper.map(course,CourseDTO.class);
+        courseStingDTO.setIdRoad(adminService.nameRoad(courseDTO.getIdRoad()));
+        courseStingDTO.setIdTheme(adminService.nameTheme(courseDTO.getIdTheme()));
+        courseStingDTO.setIdType(adminService.nameType(courseDTO.getIdType()));
+        return courseStingDTO;
     }
 }
