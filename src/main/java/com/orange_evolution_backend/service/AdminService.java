@@ -1,5 +1,8 @@
 package com.orange_evolution_backend.service;
 
+
+import java.util.ArrayList;
+
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -21,46 +24,79 @@ public class AdminService {
     ThemeRepository themeRepository;
     TypeRepository typeRepository;
 
-
-    public Road saveRoad(Road road){
+    public Road saveRoad(Road road) {
         return roadRepoistory.save(road);
     }
 
-    public Theme saveTheme(Theme theme){
+    public Theme saveTheme(Theme theme) {
         return themeRepository.save(theme);
     }
 
-    public Type saveType(Type type){
+    public Type saveType(Type type) {
         return typeRepository.save(type);
     }
 
-    public String nameRoad(Long idRoad){
+    public String nameRoad(Long idRoad) {
         return roadRepoistory.findById(idRoad).get().getName();
     }
 
-    public String nameTheme(Long idTheme){
+
+    public String nameTheme(Long idTheme) {
         return themeRepository.findById(idTheme).get().getName();
     }
 
-    public String nameType(Long idType){
+    public String nameType(Long idType) {
         return typeRepository.findById(idType).get().getName();
     }
 
-
-    public List<Road> findAllRoads(){
+    public List<Road> findAllRoads() {
         return roadRepoistory.findAll();
     }
 
-    public List<Course> findAllCoursesByRoad(String road){
+    public List<Theme> findAllThemes(){
+        return themeRepository.findAll();
+    }
+
+    public List<Type> findAllTypes(){
+        return typeRepository.findAll();
+    }
+
+    public List<Course> findAllCoursesByRoad(String road) {
         return (List<Course>) roadRepoistory.findByName(road).getCourses();
     }
 
-    public List<Course> findAllCoursesByTheme(String theme){
+    public List<Course> findAllCoursesByTheme(String theme) {
         return (List<Course>) themeRepository.findByName(theme).getCourses();
     }
 
-    public List<Course> findAllCoursesByType(String type){
+    public List<Course> findAllCoursesByType(String type) {
         return (List<Course>) typeRepository.findByName(type).getCourses();
+    }
+
+    public List<String> findListNameRoad(){
+        List<String> nameList = new ArrayList<>();
+        findAllRoads().forEach(road ->{
+            nameList.add(road.getName());
+        });
+
+        return nameList;
+    }
+
+    public List<String> findListNameTheme(){
+        List<String> nameList = new ArrayList<>();
+        findAllThemes().forEach(theme ->{
+            nameList.add(theme.getName());
+        });
+
+        return nameList;
+    }
+
+    public List<String> findListNameType(){
+        List<String> nameList = new ArrayList<>();
+        findAllTypes().forEach(type -> {
+            nameList.add(type.getName());
+        });
+        return nameList;
     }
 
 }
