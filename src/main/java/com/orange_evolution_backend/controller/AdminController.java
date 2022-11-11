@@ -21,6 +21,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 
+
 @CrossOrigin(origins = "*")
 @RequestMapping("/adminServices")
 @RestController
@@ -28,7 +29,6 @@ import lombok.AllArgsConstructor;
 @Api(description = "Admin Services HTTP methods", tags = "Admin Services")
 public class AdminController {
     AdminService adminService;
-
     ModelMapper modelMapper;
 
     @ApiOperation(value = "save a new Road")
@@ -54,6 +54,8 @@ public class AdminController {
         Type saved = adminService.saveType(type);
         return new ResponseEntity<TypeDTO>(convertTypeToDTO(saved), HttpStatus.CREATED);
     }
+
+    
 
     private RoadDTO convertRoadToDTO(Road road){
         return modelMapper.map(road, RoadDTO.class);

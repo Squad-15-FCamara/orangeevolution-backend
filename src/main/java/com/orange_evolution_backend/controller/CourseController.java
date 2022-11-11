@@ -69,14 +69,14 @@ public class CourseController {
     @ApiOperation(value = "Fetch a course by road")
     @GetMapping("/roads/{road}")
     public ResponseEntity<List<CourseDTO>> getCoursesByRoad(@PathVariable String road) {
-        List<Course> courses = courseService.findCourseByRoad(road);
+        List<Course> courses = adminService.findAllCoursesByRoad(road);
         return ResponseEntity.ok(converCoursesToListDTO(courses));
     }
 
     @ApiOperation(value = "Fetch a course by theme")
     @GetMapping("/themes/{theme}")
     public ResponseEntity<List<CourseDTO>> getCoursesByTheme(@PathVariable String theme) {
-        List<Course> courses = courseService.findCourseByTheme(theme);
+        List<Course> courses = adminService.findAllCoursesByTheme(theme);
         return ResponseEntity.ok(converCoursesToListDTO(courses));
     }
 
@@ -90,7 +90,7 @@ public class CourseController {
     @ApiOperation(value = "Fetch a course by type")
     @GetMapping("/types/{type}")
     public ResponseEntity<List<CourseDTO>> getCoursesByType(@PathVariable String type) {
-        List<Course> courses = courseService.findCoursesByType(type);
+        List<Course> courses = adminService.findAllCoursesByType(type);
         return ResponseEntity.ok(converCoursesToListDTO(courses));
     }
 
