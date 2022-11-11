@@ -26,8 +26,6 @@ public class Road {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    
-    @NotNull
     @Column(name = "road_Id")
     private Long id;
     
