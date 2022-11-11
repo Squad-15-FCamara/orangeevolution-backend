@@ -35,7 +35,7 @@ public class StatisticController {
 
 
 
-    @ApiOperation(value = "add a favorite course")
+    @ApiOperation(value = "Add a favorite course")
     @GetMapping("/favorites/{userId}/{courseId}")
     public ResponseEntity<CourseStingDTO> addFavoriteCourse(@PathVariable Long userId, @PathVariable Long courseId) {
         Course returnCourse = statisticService.favoriteCourse(userId, courseId);
@@ -49,7 +49,7 @@ public class StatisticController {
         return ResponseEntity.ok(converCoursesStringToListDTO(returnCourses));
     }
 
-    @ApiOperation(value = "add a Doing course")
+    @ApiOperation(value = "Add a Doing course")
     @GetMapping("/doing/{userId}/{courseId}")
     public ResponseEntity<CourseStingDTO> addDoingCourse(@PathVariable Long userId, @PathVariable Long courseId){
         Course returnCourse = statisticService.doingCourse(userId, courseId);
@@ -63,7 +63,7 @@ public class StatisticController {
         return ResponseEntity.ok(converCoursesStringToListDTO(returnCourse));
     }
 
-    @ApiOperation(value = "add a Done course")
+    @ApiOperation(value = "Add a Done course")
     @GetMapping("/done/{userId}/{courseId}")
     public ResponseEntity<CourseStingDTO> addDoneCourse(@PathVariable Long userId, @PathVariable Long courseId){
         Course returnCourse = statisticService.doneCourse(userId, courseId);

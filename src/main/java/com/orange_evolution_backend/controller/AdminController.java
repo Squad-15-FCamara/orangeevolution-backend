@@ -34,7 +34,7 @@ public class AdminController {
     AdminService adminService;
     ModelMapper modelMapper;
 
-    @ApiOperation(value = "save a new Road")
+    @ApiOperation(value = "Save a new Road")
     @PostMapping("/roads")
     public ResponseEntity<RoadDTO> createRoad(@RequestBody RoadDTO roadDTO){
         Road road = convertRoadToEntity(roadDTO);
@@ -42,7 +42,7 @@ public class AdminController {
         return new ResponseEntity<RoadDTO>(convertRoadToDTO(saved), HttpStatus.CREATED);
     }
 
-    @ApiOperation(value = "save a new Theme")
+    @ApiOperation(value = "Save a new Theme")
     @PostMapping("/themes")
     public ResponseEntity<ThemeDTO> createTheme(@RequestBody ThemeDTO themeDTO){
         Theme theme = convertThemeToEntity(themeDTO);
@@ -50,7 +50,7 @@ public class AdminController {
         return new ResponseEntity<ThemeDTO>(convertThemeToDTO(saved), HttpStatus.CREATED);
     }
 
-    @ApiOperation(value = "save a new Type")
+    @ApiOperation(value = "Save a new Type")
     @PostMapping("/types")
     public ResponseEntity<TypeDTO> createType(@RequestBody TypeDTO typeDTO){
         Type type = convertTypeToEntity(typeDTO);
