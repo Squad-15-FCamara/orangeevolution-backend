@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.orange_evolution_backend.dto.CourseDTO;
+import com.orange_evolution_backend.dto.CourseStingDTO;
 import com.orange_evolution_backend.entity.Course;
 import com.orange_evolution_backend.repository.CourseRepository;
+import com.orange_evolution_backend.service.AdminService;
 import com.orange_evolution_backend.service.CourseService;
 
 import io.swagger.annotations.Api;
@@ -33,13 +35,14 @@ public class CourseController {
 
     private CourseService courseService;
     private CourseRepository courseRepository;
+    private AdminService adminService;
     private ModelMapper modelMapper;
 
     @ApiOperation(value = "Fetch all courses")
     @GetMapping
-    public ResponseEntity<List<CourseDTO>> getAllCourses() {
+    public ResponseEntity<List<CourseStingDTO>> getAllCourses() {
         List<Course> courses = courseService.findAllCourses();
-        return ResponseEntity.ok(converCoursesToListDTO(courses));
+        return ResponseEntity.ok(converCoursesStringToListDTO(courses));
     }
 
     @ApiOperation(value = "Fetch a course by ID")
@@ -134,5 +137,19 @@ public class CourseController {
     public Course converCourseToEntity(CourseDTO courseDTO){
         return modelMapper.map(courseDTO, Course.class);
     }
+
+    public List<CourseStingDTO> converCoursesStringToListDTO(List<Course> courses){
+        List<CourseStingDTO> returnCoursesDTO = new ArrayList<>();
+        courses.forEach(course ->{
+            CourseStingDTO courseStingDTO = modelMapper.map(course, CourseStingDTO.class);
+            CourseDTO courseDTO = modelMapper.map(course,CourseDTO.class);
+            courseStingDTO.setIdRoad(adminService.nameRoad(courseDTO.getIdRoad()));
+            courseStingDTO.setIdTheme(adminService.nameTheme(courseDTO.getIdTheme()));
+            courseStingDTO.setIdType(adminService.nameType(courseDTO.getIdType()));
+            returnCoursesDTO.add(courseStingDTO);
+        });
+        return returnCoursesDTO;
+    }
+
 
 }
