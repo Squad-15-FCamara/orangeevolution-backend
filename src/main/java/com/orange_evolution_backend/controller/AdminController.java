@@ -58,16 +58,22 @@ public class AdminController {
         return new ResponseEntity<TypeDTO>(convertTypeToDTO(saved), HttpStatus.CREATED);
     }
 
-    @ApiOperation(value = "Fetch a names of Roads")
+    @ApiOperation(value = "Fetch all names of Roads")
     @GetMapping("/roads/names")
     public ResponseEntity<List<String>> getAllNamesRoads(){
         return ResponseEntity.ok(adminService.findListNameRoad());
     }
 
-    @ApiOperation(value ="Fetch a names of themes")
+    @ApiOperation(value ="Fetch all names of themes")
     @GetMapping("/themes/names")
     public ResponseEntity<List<String>> getAllNamesThemes(){
         return ResponseEntity.ok(adminService.findListNameTheme());
+    }
+
+    @ApiOperation(value = "Fetch all names of types")
+    @GetMapping("/types/names")
+    public ResponseEntity<List<String>> getAllNamesTypes(){
+        return ResponseEntity.ok(adminService.findListNameType());
     }
 
     

@@ -54,6 +54,10 @@ public class AdminService {
         return themeRepository.findAll();
     }
 
+    public List<Type> findAllTypes(){
+        return typeRepository.findAll();
+    }
+
     public List<Course> findAllCoursesByRoad(String road) {
         return (List<Course>) roadRepoistory.findByName(road).getCourses();
     }
@@ -81,6 +85,14 @@ public class AdminService {
             nameList.add(theme.getName());
         });
 
+        return nameList;
+    }
+
+    public List<String> findListNameType(){
+        List<String> nameList = new ArrayList<>();
+        findAllTypes().forEach(type -> {
+            nameList.add(type.getName());
+        });
         return nameList;
     }
 
