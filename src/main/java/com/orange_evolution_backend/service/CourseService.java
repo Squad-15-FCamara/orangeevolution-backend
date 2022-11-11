@@ -1,5 +1,6 @@
 package com.orange_evolution_backend.service;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,8 +36,8 @@ public class CourseService {
 
     public List<Course> findCourseByTime(Long time) {
         List<Course> returnCourse = new ArrayList<>();
-        findAllCourses().stream().forEach(course ->{
-            if(course.getTime() >= time){
+        findAllCourses().stream().forEach(course -> {
+            if (course.getTime() >= time) {
                 returnCourse.add(course);
             }
         });
@@ -46,39 +47,29 @@ public class CourseService {
     public List<Course> findCourseByTag(String tag) {
         List<Course> returnCourse = new ArrayList<>();
         findAllCourses().forEach(course -> {
-            if(course.getTags().contains(tag)){
-                returnCourse.add(course);
-            }            
-        });return returnCourse;
-    }
-
-    public List<Course> findCourseByTitle(String title){
-        List<Course> returnCourse = new ArrayList<>();
-        findAllCourses().forEach(course ->{
-            if(course.getTitle().contains(title)){
+            if (course.getTags().contains(tag)) {
                 returnCourse.add(course);
             }
-        }); return returnCourse;
+        });
+        return returnCourse;
     }
 
-    public List<Course> findCourseByRoad(String road){
-        return courseRepository.findByRoad(road);
+    public List<Course> findCourseByTitle(String title) {
+        List<Course> returnCourse = new ArrayList<>();
+        findAllCourses().forEach(course -> {
+            if (course.getTitle().contains(title)) {
+                returnCourse.add(course);
+            }
+        });
+        return returnCourse;
     }
 
-    public List<Course> findCourseByTheme(String theme){
-        return courseRepository.findByTheme(theme);
-        }
-    
-    public List<Course> findCoursesByAuthor(String author){
+    public List<Course> findCoursesByAuthor(String author) {
         return courseRepository.findByauthor(author);
     }
 
-    public List<Course> findCoursesByType(String type){
-        return courseRepository.findByType(type);
-    }
-
     public void deleteCourse(Long courseId) {
-    	courseRepository.deleteById(courseId);
+        courseRepository.deleteById(courseId);
     }
 
 }

@@ -1,7 +1,10 @@
 package com.orange_evolution_backend.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
+import com.orange_evolution_backend.entity.Course;
 import com.orange_evolution_backend.entity.Road;
 import com.orange_evolution_backend.entity.Theme;
 import com.orange_evolution_backend.entity.Type;
@@ -41,6 +44,23 @@ public class AdminService {
 
     public String nameType(Long idType){
         return typeRepository.findById(idType).get().getName();
+    }
+
+
+    public List<Road> findAllRoads(){
+        return roadRepoistory.findAll();
+    }
+
+    public List<Course> findAllCoursesByRoad(String road){
+        return (List<Course>) roadRepoistory.findByName(road).getCourses();
+    }
+
+    public List<Course> findAllCoursesByTheme(String theme){
+        return (List<Course>) themeRepository.findByName(theme).getCourses();
+    }
+
+    public List<Course> findAllCoursesByType(String type){
+        return (List<Course>) typeRepository.findByName(type).getCourses();
     }
 
 }
