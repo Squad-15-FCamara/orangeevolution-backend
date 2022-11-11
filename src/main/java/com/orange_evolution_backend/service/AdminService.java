@@ -31,4 +31,16 @@ public class AdminService {
         return typeRepository.save(type);
     }
 
+    public String nameRoad(Long idRoad){
+        return roadRepoistory.findById(idRoad).get().getName();
+    }
+
+    public String nameTheme(Long idTheme){
+        return roadRepoistory.findById(idTheme).get().getName();
+    }
+
+    public String nameType(Long idType){
+        return roadRepoistory.findById(idType).get().getName();
+    }
+
 }

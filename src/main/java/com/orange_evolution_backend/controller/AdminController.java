@@ -55,15 +55,15 @@ public class AdminController {
         return new ResponseEntity<TypeDTO>(convertTypeToDTO(saved), HttpStatus.CREATED);
     }
 
-    public RoadDTO convertRoadToDTO(Road road){
+    private RoadDTO convertRoadToDTO(Road road){
         return modelMapper.map(road, RoadDTO.class);
     }
 
-    public Road convertRoadToEntity(RoadDTO roadDTO){
+    private Road convertRoadToEntity(RoadDTO roadDTO){
         return modelMapper.map(roadDTO, Road.class);
     }
 
-    public ThemeDTO convertThemeToDTO(Theme theme){
+    private ThemeDTO convertThemeToDTO(Theme theme){
         return modelMapper.map(theme, ThemeDTO.class);
     }
     public Theme convertThemeToEntity(ThemeDTO themeDTO){
