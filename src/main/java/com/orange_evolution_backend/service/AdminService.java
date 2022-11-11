@@ -36,11 +36,11 @@ public class AdminService {
     }
 
     public String nameTheme(Long idTheme){
-        return roadRepoistory.findById(idTheme).get().getName();
+        return themeRepository.findById(idTheme).get().getName();
     }
 
     public String nameType(Long idType){
-        return roadRepoistory.findById(idType).get().getName();
+        return typeRepository.findById(idType).get().getName();
     }
 
 }
