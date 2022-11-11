@@ -1,9 +1,12 @@
 package com.orange_evolution_backend.controller;
 
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,6 +56,12 @@ public class AdminController {
         Type type = convertTypeToEntity(typeDTO);
         Type saved = adminService.saveType(type);
         return new ResponseEntity<TypeDTO>(convertTypeToDTO(saved), HttpStatus.CREATED);
+    }
+
+    @ApiOperation(value = "Fetch a names of Roads")
+    @GetMapping("/roads/names")
+    public ResponseEntity<List<String>> getAllNamesRoads(){
+        return ResponseEntity.ok(adminService.findListNameRoad());
     }
 
     

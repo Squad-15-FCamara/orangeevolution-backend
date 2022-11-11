@@ -37,7 +37,7 @@ public class CourseService {
     public List<Course> findCourseByTime(Long time) {
         List<Course> returnCourse = new ArrayList<>();
         findAllCourses().stream().forEach(course -> {
-            if (course.getTime() >= time) {
+            if (course.getTime() <= time) {
                 returnCourse.add(course);
             }
         });
