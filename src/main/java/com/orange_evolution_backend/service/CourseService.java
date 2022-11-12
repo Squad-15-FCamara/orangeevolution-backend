@@ -58,7 +58,8 @@ public class CourseService {
     public List<Course> findCourseByTitle(String title) {
         List<Course> returnCourse = new ArrayList<>();
         findAllCourses().forEach(course -> {
-            if (course.getTitle().contains(title)) {
+            String local = course.getTitle().toLowerCase();
+            if (local.contains(title.toLowerCase()) ) {
                 returnCourse.add(course);
             }
         });
