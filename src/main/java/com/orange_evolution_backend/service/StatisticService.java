@@ -1,5 +1,6 @@
 package com.orange_evolution_backend.service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,13 +43,23 @@ public class StatisticService {
     }
 
     public void deleteFavoriteCourse(Long idUser,Long idCourse){
-
-        Course remove = userRepository.findById(idUser).get().getCourses().stream().filter(course ->  course.getId().equals(idCourse)).findAny().get();
-        userRepository.findById(idUser).get().getCourses().remove(remove);
+        User user = userRepository.findById(idUser).get();
+        Course course = courseRepository.findById(idCourse).get();
+        user.getCourses().remove(course);
+        userRepository.save(user);
     }
 
-    public void deleteAllFavoriteCourse(Long idUser){
-        userRepository.findById(idUser).get().getCourses().clear();
+    public User deleteAllFavoriteCourse(Long idUser){
+        User user = userRepository.findById(idUser).get();
+        user.getCourses().forEach(course ->{
+            if(course.getUsers().contains(user)){
+                course.getUsers().remove(user);
+                courseRepository.save(course);
+            }
+            
+        });
+        user.getCourses().removeAll(user.getCourses());
+        return userRepository.save(user);
     }
 
     public Course doingCourse(Long idUser, Long idCourse){
