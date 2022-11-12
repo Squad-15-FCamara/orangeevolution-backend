@@ -42,6 +42,10 @@ public class StatisticService {
         return favoritCourses;
     }
 
+    public void deleteAllFavoriteCourse(Long idUser){
+        userRepository.findById(idUser).get().getCourses().clear();
+    }
+
     public Course doingCourse(Long idUser, Long idCourse){
         Optional<User> userOpt = userRepository.findById(idUser);
         Optional<Course> courseOpt = courseRepository.findById(idCourse);
