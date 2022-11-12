@@ -33,13 +33,18 @@ public class StatisticService {
 
         return null;
     }
-    
-    
+
     public List<Course> findFavoritesCoursesByIdUser(Long idUser){
         User user = userRepository.findById(idUser).get();
         List<Course> favoritCourses = (List<Course>) user.getCourses() ;
 
         return favoritCourses;
+    }
+
+    public void deleteFavoriteCourse(Long idUser,Long idCourse){
+
+        Course remove = userRepository.findById(idUser).get().getCourses().stream().filter(course ->  course.getId().equals(idCourse)).findAny().get();
+        userRepository.findById(idUser).get().getCourses().remove(remove);
     }
 
     public void deleteAllFavoriteCourse(Long idUser){
