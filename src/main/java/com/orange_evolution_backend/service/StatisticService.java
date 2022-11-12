@@ -45,7 +45,9 @@ public class StatisticService {
     public void deleteFavoriteCourse(Long idUser,Long idCourse){
         User user = userRepository.findById(idUser).get();
         Course course = courseRepository.findById(idCourse).get();
+        course.getUsers().remove(user);
         user.getCourses().remove(course);
+        courseRepository.save(course);
         userRepository.save(user);
     }
 
@@ -56,7 +58,6 @@ public class StatisticService {
                 course.getUsers().remove(user);
                 courseRepository.save(course);
             }
-            
         });
         user.getCourses().removeAll(user.getCourses());
         return userRepository.save(user);
