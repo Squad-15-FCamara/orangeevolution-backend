@@ -24,6 +24,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
         return buildErrorResponse(exception, HttpStatus.BAD_REQUEST, webRequest);
     }
 
+    @ExceptionHandler(NullPointerException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<Object> handleException(NullPointerException exception,WebRequest webRequest){
+        return buildErrorResponse(exception, "Cant be find", HttpStatus.BAD_REQUEST, webRequest);
+    }
+
 
     private ResponseEntity<Object> buildErrorResponse(Exception exception, HttpStatus httpStatus, WebRequest webRequest){
         return buildErrorResponse(exception,exception.getMessage(), httpStatus, webRequest);

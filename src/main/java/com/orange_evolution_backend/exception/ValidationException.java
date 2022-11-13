@@ -22,5 +22,4 @@ public class ValidationException {
             throw new CourseNotFoundException("Course not Found by " + msg);
         }
     }
-
 }

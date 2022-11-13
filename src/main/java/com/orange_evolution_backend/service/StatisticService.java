@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.orange_evolution_backend.entity.Course;
 import com.orange_evolution_backend.entity.User;
 import com.orange_evolution_backend.exception.CourseNotFoundException;
+import com.orange_evolution_backend.exception.ValidationException;
 import com.orange_evolution_backend.repository.CourseRepository;
 import com.orange_evolution_backend.repository.UserRepository;
 
@@ -18,6 +19,7 @@ import lombok.AllArgsConstructor;
 public class StatisticService {
     CourseRepository courseRepository;
     UserRepository userRepository;
+    ValidationException validationException;
 
     public Course favoriteCourse(Long idUser, Long idCourse) {
         Optional<User> userOpt = userRepository.findById(idUser);
@@ -38,7 +40,7 @@ public class StatisticService {
     public List<Course> findFavoritesCoursesByIdUser(Long idUser) {
         User user = userRepository.findById(idUser).get();
         List<Course> favoritCourses = (List<Course>) user.getCourses();
-        
+
         return favoritCourses;
     }
 
@@ -72,7 +74,7 @@ public class StatisticService {
             return courseRepository.save(course);
         }
 
-        return null;
+        throw new CourseNotFoundException("This course cant be find");
     }
 
     public List<Course> findDoingCoursesByIdUser(Long idUser) {
@@ -91,7 +93,7 @@ public class StatisticService {
             course.getUserDoing().remove(userOpt.get());
             return courseRepository.save(course);
         }
-        return null;
+        throw new CourseNotFoundException("This course cant be find");
     }
 
     public List<Course> findDoneCourseByIdUser(Long idUser) {
