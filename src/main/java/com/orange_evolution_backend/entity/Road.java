@@ -36,4 +36,7 @@ public class Road {
     @OneToMany(mappedBy = "road")
     private Collection<Course> courses;
 
+    @OneToMany(mappedBy = "roadTheme")
+    private Collection<Theme> themes;
+
 }

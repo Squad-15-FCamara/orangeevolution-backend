@@ -107,10 +107,10 @@ public class CourseController {
 
     @ApiOperation(value = "Create a course")
     @PostMapping
-    public ResponseEntity<CourseDTO> createCourse(@RequestBody CourseDTO courseDTO) {
+    public ResponseEntity<CourseStingDTO> createCourse(@RequestBody CourseDTO courseDTO) {
         Course course = converCourseToEntity(courseDTO);
         Course saved = courseService.saveCourse(course);
-        return new ResponseEntity<CourseDTO>(convertCourseToDTO(saved), HttpStatus.CREATED);
+        return new ResponseEntity<CourseStingDTO>(convertCourseStringDTO(saved), HttpStatus.CREATED);
     }
 
 
@@ -153,6 +153,15 @@ public class CourseController {
             returnCoursesDTO.add(courseStingDTO);
         });
         return returnCoursesDTO;
+    }
+
+    public CourseStingDTO convertCourseStringDTO(Course course){
+        CourseStingDTO courseStingDTO = modelMapper.map(course, CourseStingDTO.class);
+        CourseDTO courseDTO = modelMapper.map(course,CourseDTO.class);
+        courseStingDTO.setIdRoad(adminService.nameRoad(courseDTO.getIdRoad()));
+        courseStingDTO.setIdTheme(adminService.nameTheme(courseDTO.getIdTheme()));
+        courseStingDTO.setIdType(adminService.nameType(courseDTO.getIdType()));
+        return courseStingDTO;
     }
 
 
