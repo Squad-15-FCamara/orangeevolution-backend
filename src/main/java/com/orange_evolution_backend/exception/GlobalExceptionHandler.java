@@ -19,7 +19,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
     private boolean enableTracer;
 
     @ExceptionHandler(CourseNotFoundException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<Object> handleCourseNotFoundException(CourseNotFoundException exception, WebRequest webRequest){
         return buildErrorResponse(exception, HttpStatus.BAD_REQUEST, webRequest);
     }

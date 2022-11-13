@@ -1,6 +1,5 @@
 package com.orange_evolution_backend.service;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.orange_evolution_backend.entity.Course;
 import com.orange_evolution_backend.exception.CourseNotFoundException;
+import com.orange_evolution_backend.exception.ValidationException;
 import com.orange_evolution_backend.repository.CourseRepository;
 import com.orange_evolution_backend.repository.UserRepository;
 
@@ -18,6 +18,7 @@ import lombok.AllArgsConstructor;
 public class CourseService {
     CourseRepository courseRepository;
     UserRepository userRepository;
+    ValidationException validationException;
 
     public List<Course> findAllCourses() {
         return courseRepository.findAll();
@@ -41,6 +42,7 @@ public class CourseService {
                 returnCourse.add(course);
             }
         });
+        validationException.ValidationExceptionList(returnCourse);
         return returnCourse;
     }
 
@@ -51,6 +53,7 @@ public class CourseService {
                 returnCourse.add(course);
             }
         });
+        validationException.ValidationExceptionList(returnCourse,tag);
         return returnCourse;
     }
 
@@ -58,15 +61,18 @@ public class CourseService {
         List<Course> returnCourse = new ArrayList<>();
         findAllCourses().forEach(course -> {
             String local = course.getTitle().toLowerCase();
-            if (local.contains(title.toLowerCase()) ) {
+            if (local.contains(title.toLowerCase())) {
                 returnCourse.add(course);
             }
         });
+        validationException.ValidationExceptionList(returnCourse, title);
         return returnCourse;
     }
 
     public List<Course> findCoursesByAuthor(String author) {
-        return courseRepository.findByauthor(author);
+        List<Course> list = courseRepository.findByauthor(author);
+        validationException.ValidationExceptionList(list, author);
+        return list;
     }
 
     public void deleteCourse(Long courseId) {

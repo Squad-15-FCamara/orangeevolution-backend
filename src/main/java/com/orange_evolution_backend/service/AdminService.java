@@ -11,6 +11,7 @@ import com.orange_evolution_backend.entity.Course;
 import com.orange_evolution_backend.entity.Road;
 import com.orange_evolution_backend.entity.Theme;
 import com.orange_evolution_backend.entity.Type;
+import com.orange_evolution_backend.exception.ValidationException;
 import com.orange_evolution_backend.repository.RoadRepoistory;
 import com.orange_evolution_backend.repository.ThemeRepository;
 import com.orange_evolution_backend.repository.TypeRepository;
@@ -23,6 +24,7 @@ public class AdminService {
     RoadRepoistory roadRepoistory;
     ThemeRepository themeRepository;
     TypeRepository typeRepository;
+    ValidationException validationException;
 
     public Road saveRoad(Road road) {
         return roadRepoistory.save(road);
@@ -62,11 +64,15 @@ public class AdminService {
     }
 
     public List<Course> findAllCoursesByRoad(String road) {
-        return (List<Course>) roadRepoistory.findByName(road).getCourses();
+        List<Course> returnList = (List<Course>) roadRepoistory.findByName(road).getCourses();
+        validationException.ValidationExceptionList(returnList, road);
+        return returnList;
     }
 
     public List<Course> findAllCoursesByTheme(String theme) {
-        return (List<Course>) themeRepository.findByName(theme).getCourses();
+        List<Course> returnList = (List<Course>) themeRepository.findByName(theme).getCourses();
+        validationException.ValidationExceptionList(returnList,theme);
+        return returnList;
     }
 
     public List<Course> findAllCoursesByType(String type) {
@@ -78,7 +84,6 @@ public class AdminService {
         findAllRoads().forEach(road ->{
             nameList.add(road.getName());
         });
-
         return nameList;
     }
 
