@@ -95,6 +95,20 @@ public class StatisticController {
         return new ResponseEntity<UserDTO>(convertUserToDTO(user),HttpStatus.ACCEPTED);
     }
 
+    @ApiOperation(value = "Remove a user's doing course by idUser and IdCourse")
+    @DeleteMapping("/delete/{idUser}/{idCourse}")
+    public ResponseEntity<Void> removeDoingCourse(@PathVariable Long idUser, @PathVariable Long idCourse){
+        statisticService.deleteDoingCourse(idUser, idCourse);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
+
+    @ApiOperation(value = "Remove a user's done course by idUser and IdCourse")
+    @DeleteMapping("/delete/{idUser}/{idCourse}")
+    public ResponseEntity<Void> removeDoneCourse(@PathVariable Long idUser, @PathVariable Long idCourse){
+        statisticService.deleteDoneCourse(idUser, idCourse);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
+
     public List<CourseDTO> converCoursesToListDTO(List<Course> courses){
         List<CourseDTO> returnCoursesDTO = new ArrayList<>();
         courses.forEach(course ->{

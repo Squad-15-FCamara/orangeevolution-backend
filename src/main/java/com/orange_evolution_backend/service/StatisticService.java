@@ -77,6 +77,15 @@ public class StatisticService {
         throw new CourseNotFoundException("This course cant be find");
     }
 
+    public void deleteDoingCourse(Long idUser, Long idCourse) {
+        User user = userRepository.findById(idUser).get();
+        Course course = courseRepository.findById(idCourse).get();
+        course.getUserDoing().remove(user);
+        user.getCourseDoing().remove(course);
+        courseRepository.save(course);
+        userRepository.save(user);
+    }
+
     public List<Course> findDoingCoursesByIdUser(Long idUser) {
         User user = userRepository.findById(idUser).get();
         List<Course> doingCourses = (List<Course>) user.getCourseDoing();
@@ -100,6 +109,15 @@ public class StatisticService {
         User user = userRepository.findById(idUser).get();
         List<Course> doneCourses = (List<Course>) user.getCourseDone();
         return doneCourses;
+    }
+
+    public void deleteDoneCourse(Long idUser, Long idCourse) {
+        User user = userRepository.findById(idUser).get();
+        Course course = courseRepository.findById(idCourse).get();
+        course.getUserDone().remove(user);
+        user.getCourseDone().remove(course);
+        courseRepository.save(course);
+        userRepository.save(user);
     }
 
 }
