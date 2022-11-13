@@ -70,8 +70,10 @@ public class StatisticService {
         Optional<Course> courseOpt = courseRepository.findById(idCourse);
         if (userOpt.isPresent() && courseOpt.isPresent()) {
             Course course = courseOpt.get();
-            course.getUserDoing().add(userOpt.get());
-            return courseRepository.save(course);
+            if(userOpt.get().getCourseDoing().contains(course)){
+                throw new CourseNotFoundException("This course is already  doing ");}
+                course.getUsers().add(userOpt.get());
+                return courseRepository.save(course);
         }
 
         throw new CourseNotFoundException("This course cant be find");
@@ -98,9 +100,13 @@ public class StatisticService {
         Optional<Course> courseOpt = courseRepository.findById(idCourse);
         if (userOpt.isPresent() && courseOpt.isPresent()) {
             Course course = courseOpt.get();
-            course.getUserDone().add(userOpt.get());
-            course.getUserDoing().remove(userOpt.get());
-            return courseRepository.save(course);
+            if(userOpt.get().getCourseDone().contains(course)){
+                throw new CourseNotFoundException("This course is already  done ");}
+                course.getUsers().add(userOpt.get());
+                course.getUserDoing().remove(userOpt.get());
+                return courseRepository.save(course);
+            
+            
         }
         throw new CourseNotFoundException("This course cant be find");
     }
