@@ -1,6 +1,5 @@
 package com.orange_evolution_backend.service;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,30 +18,29 @@ public class StatisticService {
     CourseRepository courseRepository;
     UserRepository userRepository;
 
-
-    public Course favoriteCourse(Long idUser, Long idCourse){
+    public Course favoriteCourse(Long idUser, Long idCourse) {
         Optional<User> userOpt = userRepository.findById(idUser);
         Optional<Course> courseOpt = courseRepository.findById(idCourse);
 
-        if(userOpt.isPresent() && courseOpt.isPresent()){
+        if (userOpt.isPresent() && courseOpt.isPresent()) {
             Course course = courseOpt.get();
             course.getUsers().add(userOpt.get());
 
             return courseRepository.save(course);
-            
+
         }
 
         return null;
     }
 
-    public List<Course> findFavoritesCoursesByIdUser(Long idUser){
+    public List<Course> findFavoritesCoursesByIdUser(Long idUser) {
         User user = userRepository.findById(idUser).get();
-        List<Course> favoritCourses = (List<Course>) user.getCourses() ;
+        List<Course> favoritCourses = (List<Course>) user.getCourses();
 
         return favoritCourses;
     }
 
-    public void deleteFavoriteCourse(Long idUser,Long idCourse){
+    public void deleteFavoriteCourse(Long idUser, Long idCourse) {
         User user = userRepository.findById(idUser).get();
         Course course = courseRepository.findById(idCourse).get();
         course.getUsers().remove(user);
@@ -51,10 +49,10 @@ public class StatisticService {
         userRepository.save(user);
     }
 
-    public User deleteAllFavoriteCourse(Long idUser){
+    public User deleteAllFavoriteCourse(Long idUser) {
         User user = userRepository.findById(idUser).get();
-        user.getCourses().forEach(course ->{
-            if(course.getUsers().contains(user)){
+        user.getCourses().forEach(course -> {
+            if (course.getUsers().contains(user)) {
                 course.getUsers().remove(user);
                 courseRepository.save(course);
             }
@@ -63,11 +61,10 @@ public class StatisticService {
         return userRepository.save(user);
     }
 
-    public Course doingCourse(Long idUser, Long idCourse){
+    public Course doingCourse(Long idUser, Long idCourse) {
         Optional<User> userOpt = userRepository.findById(idUser);
         Optional<Course> courseOpt = courseRepository.findById(idCourse);
-
-        if(userOpt.isPresent() && courseOpt.isPresent()){
+        if (userOpt.isPresent() && courseOpt.isPresent()) {
             Course course = courseOpt.get();
             course.getUserDoing().add(userOpt.get());
             return courseRepository.save(course);
@@ -76,17 +73,17 @@ public class StatisticService {
         return null;
     }
 
-    public List<Course> findDoingCoursesByIdUser(Long idUser){
+    public List<Course> findDoingCoursesByIdUser(Long idUser) {
         User user = userRepository.findById(idUser).get();
         List<Course> doingCourses = (List<Course>) user.getCourseDoing();
 
         return doingCourses;
     }
 
-    public Course doneCourse(Long idUser, Long idCourse){
+    public Course doneCourse(Long idUser, Long idCourse) {
         Optional<User> userOpt = userRepository.findById(idUser);
         Optional<Course> courseOpt = courseRepository.findById(idCourse);
-        if(userOpt.isPresent() && courseOpt.isPresent()){
+        if (userOpt.isPresent() && courseOpt.isPresent()) {
             Course course = courseOpt.get();
             course.getUserDone().add(userOpt.get());
             course.getUserDoing().remove(userOpt.get());
@@ -95,11 +92,10 @@ public class StatisticService {
         return null;
     }
 
-    public List<Course> findDoneCourseByIdUser(Long idUser){
+    public List<Course> findDoneCourseByIdUser(Long idUser) {
         User user = userRepository.findById(idUser).get();
         List<Course> doneCourses = (List<Course>) user.getCourseDone();
         return doneCourses;
     }
-
 
 }
