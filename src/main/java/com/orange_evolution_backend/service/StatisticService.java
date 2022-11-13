@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.orange_evolution_backend.entity.Course;
 import com.orange_evolution_backend.entity.User;
+import com.orange_evolution_backend.exception.CourseNotFoundException;
 import com.orange_evolution_backend.repository.CourseRepository;
 import com.orange_evolution_backend.repository.UserRepository;
 
@@ -24,19 +25,20 @@ public class StatisticService {
 
         if (userOpt.isPresent() && courseOpt.isPresent()) {
             Course course = courseOpt.get();
+            if(userOpt.get().getCourses().contains(course)){
+            throw new CourseNotFoundException("This course is already  favorited ");}
             course.getUsers().add(userOpt.get());
-
             return courseRepository.save(course);
 
         }
 
-        return null;
+        throw new CourseNotFoundException("This course cant be favorited" );
     }
 
     public List<Course> findFavoritesCoursesByIdUser(Long idUser) {
         User user = userRepository.findById(idUser).get();
         List<Course> favoritCourses = (List<Course>) user.getCourses();
-
+        
         return favoritCourses;
     }
 
