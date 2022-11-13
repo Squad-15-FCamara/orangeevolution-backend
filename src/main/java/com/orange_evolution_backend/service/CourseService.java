@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.orange_evolution_backend.entity.Course;
+import com.orange_evolution_backend.exception.CourseNotFoundException;
 import com.orange_evolution_backend.repository.CourseRepository;
 import com.orange_evolution_backend.repository.UserRepository;
 
@@ -26,7 +27,7 @@ public class CourseService {
 
     public Course findCourseByID(Long idCourse) {
         return courseRepository.findById(idCourse)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Este material não existe"));
+                .orElseThrow(() -> new CourseNotFoundException("Course " + idCourse + " not found"));
     }
 
     public Course saveCourse(Course course) {
