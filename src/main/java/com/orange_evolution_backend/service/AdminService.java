@@ -62,14 +62,11 @@ public class AdminService {
     }
 
     public List<Course> findAllCoursesByRoad(String road) {
-        List<Course> returnList = (List<Course>) roadRepoistory.findByName(road).getCourses();
-        return returnList;
+        return (List<Course>) roadRepoistory.findByName(road).getCourses();
     }
 
     public List<Course> findAllCoursesByTheme(String theme) {
-        List<Course> returnList = (List<Course>) themeRepository.findByName(theme).getCourses();
-        validationException.nullPointException(returnList, theme);
-        return returnList;
+        return (List<Course>) themeRepository.findByName(theme).getCourses();
     }
 
     public List<Course> findAllCoursesByType(String type) {
