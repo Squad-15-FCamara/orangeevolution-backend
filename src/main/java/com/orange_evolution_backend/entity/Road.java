@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
@@ -38,5 +41,17 @@ public class Road {
 
     @OneToMany(mappedBy = "roadTheme")
     private Collection<Theme> themes;
+    
+    @ManyToMany
+    @JoinTable(name = "doingRoad",
+    joinColumns = @JoinColumn(name = "road_id"),
+    inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private Collection<User> userDoing;
+
+    @ManyToMany
+    @JoinTable(name = "doneRoad",
+    joinColumns = @JoinColumn(name = "road_id"),
+    inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private Collection<User> userDone;
 
 }

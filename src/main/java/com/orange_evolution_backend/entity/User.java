@@ -58,4 +58,11 @@ public class User {
 
 	@ManyToMany(mappedBy = "userDone")
 	private Collection<Course> courseDone;
+
+
+	@ManyToMany(mappedBy = "doingRoad")
+	private Collection<Road> roadDoing;
+
+	@ManyToMany(mappedBy = "doneRoad")
+	private Collection<Road> roadDone;
 }
