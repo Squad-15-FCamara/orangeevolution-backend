@@ -65,13 +65,12 @@ public class AdminService {
 
     public List<Course> findAllCoursesByRoad(String road) {
         List<Course> returnList = (List<Course>) roadRepoistory.findByName(road).getCourses();
-        validationException.ValidationExceptionList(returnList, road);
         return returnList;
     }
 
     public List<Course> findAllCoursesByTheme(String theme) {
         List<Course> returnList = (List<Course>) themeRepository.findByName(theme).getCourses();
-        validationException.ValidationExceptionList(returnList,theme);
+        validationException.nullPointException(returnList, theme);
         return returnList;
     }
 
