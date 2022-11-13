@@ -1,6 +1,5 @@
 package com.orange_evolution_backend.service;
 
-
 import java.util.ArrayList;
 
 import java.util.List;
@@ -42,7 +41,6 @@ public class AdminService {
         return roadRepoistory.findById(idRoad).get().getName();
     }
 
-
     public String nameTheme(Long idTheme) {
         return themeRepository.findById(idTheme).get().getName();
     }
@@ -55,47 +53,44 @@ public class AdminService {
         return roadRepoistory.findAll();
     }
 
-    public List<Theme> findAllThemes(){
+    public List<Theme> findAllThemes() {
         return themeRepository.findAll();
     }
 
-    public List<Type> findAllTypes(){
+    public List<Type> findAllTypes() {
         return typeRepository.findAll();
     }
 
     public List<Course> findAllCoursesByRoad(String road) {
-        List<Course> returnList = (List<Course>) roadRepoistory.findByName(road).getCourses();
-        return returnList;
+        return (List<Course>) roadRepoistory.findByName(road).getCourses();
     }
 
     public List<Course> findAllCoursesByTheme(String theme) {
-        List<Course> returnList = (List<Course>) themeRepository.findByName(theme).getCourses();
-        validationException.nullPointException(returnList, theme);
-        return returnList;
+        return (List<Course>) themeRepository.findByName(theme).getCourses();
     }
 
     public List<Course> findAllCoursesByType(String type) {
         return (List<Course>) typeRepository.findByName(type).getCourses();
     }
 
-    public List<String> findListNameRoad(){
+    public List<String> findListNameRoad() {
         List<String> nameList = new ArrayList<>();
-        findAllRoads().forEach(road ->{
+        findAllRoads().forEach(road -> {
             nameList.add(road.getName());
         });
         return nameList;
     }
 
-    public List<String> findListNameTheme(){
+    public List<String> findListNameTheme() {
         List<String> nameList = new ArrayList<>();
-        findAllThemes().forEach(theme ->{
+        findAllThemes().forEach(theme -> {
             nameList.add(theme.getName());
         });
 
         return nameList;
     }
 
-    public List<String> findListNameType(){
+    public List<String> findListNameType() {
         List<String> nameList = new ArrayList<>();
         findAllTypes().forEach(type -> {
             nameList.add(type.getName());
