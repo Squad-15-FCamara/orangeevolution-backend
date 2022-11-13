@@ -21,7 +21,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
     @ExceptionHandler(CourseNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<Object> handleCourseNotFoundException(CourseNotFoundException exception, WebRequest webRequest){
-        return buildErrorResponse(exception, HttpStatus.NOT_FOUND, webRequest);
+        return buildErrorResponse(exception, HttpStatus.BAD_REQUEST, webRequest);
     }
 
 

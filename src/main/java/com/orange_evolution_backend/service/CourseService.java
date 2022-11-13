@@ -4,9 +4,7 @@ package com.orange_evolution_backend.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import com.orange_evolution_backend.entity.Course;
 import com.orange_evolution_backend.exception.CourseNotFoundException;
