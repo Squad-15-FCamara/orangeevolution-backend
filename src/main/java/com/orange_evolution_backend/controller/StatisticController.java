@@ -82,7 +82,7 @@ public class StatisticController {
     }
 
     @ApiOperation(value = "Remove a user's favorite by idUser and IdCourse")
-    @DeleteMapping("/delete/{idUser}/{idCourse}")
+    @DeleteMapping("/delete//favortes/{idUser}/{idCourse}")
     public ResponseEntity<Void> removeFavoriteCourse(@PathVariable Long idUser, @PathVariable Long idCourse){
         statisticService.deleteFavoriteCourse(idUser, idCourse);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
@@ -96,14 +96,14 @@ public class StatisticController {
     }
 
     @ApiOperation(value = "Remove a user's doing course by idUser and IdCourse")
-    @DeleteMapping("/delete/{idUser}/{idCourse}")
+    @DeleteMapping("/delete/doing/{idUser}/{idCourse}")
     public ResponseEntity<Void> removeDoingCourse(@PathVariable Long idUser, @PathVariable Long idCourse){
         statisticService.deleteDoingCourse(idUser, idCourse);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
     @ApiOperation(value = "Remove a user's done course by idUser and IdCourse")
-    @DeleteMapping("/delete/{idUser}/{idCourse}")
+    @DeleteMapping("/delete/done/{idUser}/{idCourse}")
     public ResponseEntity<Void> removeDoneCourse(@PathVariable Long idUser, @PathVariable Long idCourse){
         statisticService.deleteDoneCourse(idUser, idCourse);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
