@@ -30,8 +30,12 @@ public class StatisticAdminService {
     }
 
     public Long counterUserDidnt(Long idCourse) {
-        return (long) (userRepository.findAll().size() - (courseRepository.findById(idCourse).get().getUserDone().size()
-                + courseRepository.findById(idCourse).get().getUserDoing().size()));
+        Long counter = (long) (userRepository.findAll().size() - (courseRepository.findById(idCourse).get().getUserDone().size()
+        + courseRepository.findById(idCourse).get().getUserDoing().size()));
+        if(counter < 0){
+            return (long) 0;
+        }
+        return counter; 
     }
 
     public Long counterAllUsers() {
@@ -59,15 +63,22 @@ public class StatisticAdminService {
     }
 
     public Long counterUserDidntRoad(String road) {
-        return (long) (userRepository.findAll().size()
-                - (roadRepoistory.findByName(road).getUserDoingRoad().size()
-                        + roadRepoistory.findByName(road).getUserDoneRoad().size()));
+
+        Long counter = (long) (userRepository.findAll().size()
+        - (roadRepoistory.findByName(road).getUserDoingRoad().size()
+                + roadRepoistory.findByName(road).getUserDoneRoad().size()));
+
+        if(counter < 0) {return (long) 0;}
+        return counter;
     }
 
     public Long counterUserDidntTheme(String theme) {
-        return (long) (userRepository.findAll().size()
-                - (themeRepository.findByName(theme).getUserDoingTheme().size() +
-                        themeRepository.findByName(theme).getUserDoneTheme().size()));
+        Long counter = (long) (userRepository.findAll().size()
+        - (themeRepository.findByName(theme).getUserDoingTheme().size() +
+                themeRepository.findByName(theme).getUserDoneTheme().size()));
+        if(counter < 0){
+            return (long) 0;
+        }  return counter; 
     }
     
 
@@ -98,4 +109,6 @@ public class StatisticAdminService {
         });
         return statistic;
     }
+
+    
 }
