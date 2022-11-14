@@ -74,6 +74,10 @@ public class AdminService {
         return (List<Course>) typeRepository.findByName(type).getCourses();
     }
 
+    public List<Theme> findAllThemesByRoad(String road){
+        return (List<Theme>) roadRepoistory.findByName(road).getThemes();
+    }
+
     public List<String> findListNameRoad() {
         List<String> nameList = new ArrayList<>();
         findAllRoads().forEach(road -> {
@@ -144,6 +148,15 @@ public class AdminService {
             road.getUserDoneRoad().add(user);
             roadRepoistory.save(road);
         }
+    }
+
+    public Theme updaTheme(Theme themeP, Long nameTheme){
+        Theme theme = themeRepository.findById(nameTheme).get();
+        theme.setName(themeP.getName());
+        theme.setRoadTheme(themeP.getRoadTheme());
+        return themeRepository.save(theme);
+
+
     }
 
 }

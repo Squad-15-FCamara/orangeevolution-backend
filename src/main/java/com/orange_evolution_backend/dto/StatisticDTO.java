@@ -4,11 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @AllArgsConstructor
+@Data
 @NoArgsConstructor
-public class ThemeDTO {
-    private Long id;
+public class StatisticDTO {
+
     private String name;
-    private Long idRoad;
+    private Long doing;
+    private Long done;
+    private Long didnt;
+    
 }

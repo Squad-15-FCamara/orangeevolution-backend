@@ -1,5 +1,7 @@
 package com.orange_evolution_backend.controller;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.orange_evolution_backend.dto.StatisticDTO;
 import com.orange_evolution_backend.service.StatisticAdminService;
 
 import io.swagger.annotations.Api;
@@ -87,6 +90,14 @@ public class StatisticAdminController {
     public ResponseEntity<Long> counterUsersDidntTheme(@PathVariable String name){
         return ResponseEntity.ok(statisticAdminService.counterUserDidntTheme(name));
     }
+
+    @ApiOperation(value = "Statics Themes to user by Road")
+    @GetMapping("/counter/statitcs/{id}")
+    public ResponseEntity<List<StatisticDTO>> statistTheme(@PathVariable String id){
+        return ResponseEntity.ok(statisticAdminService.statisticTheme(id));
+    }
+
+
 
 
 }

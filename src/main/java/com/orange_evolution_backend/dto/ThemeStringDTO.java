@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ThemeDTO {
+public class ThemeStringDTO {
     private Long id;
     private String name;
-    private Long idRoad;
+    private String nameRoad;
 }
