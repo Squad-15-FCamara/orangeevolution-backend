@@ -45,6 +45,13 @@ public class StatisticAdminService {
     public Long counterUserDoneRoad(Long idRoad){
         return (long) roadRepoistory.findById(idRoad).get().getUserDoneRoad().size();
     }
+    public Long counterUserDoingTheme(Long idTheme){
+        return (long) roadRepoistory.findById(idTheme).get().getUserDoingRoad().size();
+    }
+
+    public Long counterUserDoneTheme(Long idTheme){
+        return (long) roadRepoistory.findById(idTheme).get().getUserDoneRoad().size();
+    }
 
 
 
