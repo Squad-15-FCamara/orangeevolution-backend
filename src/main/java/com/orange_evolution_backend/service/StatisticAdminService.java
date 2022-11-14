@@ -29,32 +29,41 @@ public class StatisticAdminService {
         return (long) (userRepository.findAll().size() - (courseRepository.findById(idCourse).get().getUserDone().size()
                 + courseRepository.findById(idCourse).get().getUserDoing().size()));
     }
-    
-    public Long counterAllUsers(){
+
+    public Long counterAllUsers() {
         return (long) userRepository.findAll().size();
     }
 
-    public Long counterAllCourses(){
+    public Long counterAllCourses() {
         return (long) courseRepository.findAll().size();
     }
 
-    public Long counterUserDoingRoad(Long idRoad){
+    public Long counterUserDoingRoad(Long idRoad) {
         return (long) roadRepoistory.findById(idRoad).get().getUserDoingRoad().size();
     }
 
-    public Long counterUserDoneRoad(Long idRoad){
+    public Long counterUserDoneRoad(Long idRoad) {
         return (long) roadRepoistory.findById(idRoad).get().getUserDoneRoad().size();
     }
-    public Long counterUserDoingTheme(Long idTheme){
+
+    public Long counterUserDoingTheme(Long idTheme) {
         return (long) roadRepoistory.findById(idTheme).get().getUserDoingRoad().size();
     }
 
-    public Long counterUserDoneTheme(Long idTheme){
+    public Long counterUserDoneTheme(Long idTheme) {
         return (long) roadRepoistory.findById(idTheme).get().getUserDoneRoad().size();
     }
 
+    public Long counterUserDidntRoad(Long idRoad) {
+        return (long) (userRepository.findAll().size()
+                - (roadRepoistory.findById(idRoad).get().getUserDoingRoad().size()
+                        + roadRepoistory.findById(idRoad).get().getUserDoneRoad().size()));
+    }
 
-
-
+    public Long counterUserDidntTheme(Long idTheme) {
+        return (long) (userRepository.findAll().size()
+                - (themeRepository.findById(idTheme).get().getUserDoingTheme().size() +
+                        themeRepository.findById(idTheme).get().getUserDoneTheme().size()));
+    }
 
 }
