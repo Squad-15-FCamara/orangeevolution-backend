@@ -107,8 +107,8 @@ public class CourseController {
 
     @ApiOperation(value = "Create a course")
     @PostMapping
-    public ResponseEntity<CourseStingDTO> createCourse(@RequestBody CourseDTO courseDTO) {
-        Course course = converCourseToEntity(courseDTO);
+    public ResponseEntity<CourseStingDTO> createCourse(@RequestBody CourseStingDTO courseStringDTO) {
+        Course course = converCourseStringToEntity(courseStringDTO);
         Course saved = courseService.saveCourse(course);
         return new ResponseEntity<CourseStingDTO>(convertCourseStringDTO(saved), HttpStatus.CREATED);
     }
@@ -139,6 +139,21 @@ public class CourseController {
         return modelMapper.map(course, CourseDTO.class);
     }
     public Course converCourseToEntity(CourseDTO courseDTO){
+        return modelMapper.map(courseDTO, Course.class);
+    }
+
+    public Course converCourseStringToEntity(CourseStingDTO courseStringDTO){
+        CourseDTO courseDTO = new CourseDTO();
+        courseDTO.setIdRoad(adminService.findIdRoadByName(courseStringDTO.getIdRoad()));
+        courseDTO.setIdTheme(adminService.findIdThemeByName(courseStringDTO.getIdTheme()));
+        courseDTO.setIdType(adminService.findIdTypeByName(courseStringDTO.getIdType()));
+        courseDTO.setId(courseStringDTO.getId());
+        courseDTO.setAuthor(courseStringDTO.getAuthor());
+        courseDTO.setLink(courseStringDTO.getLink());
+        courseDTO.setTitle(courseStringDTO.getTitle());
+        courseDTO.setTags(courseStringDTO.getTags());
+        courseDTO.setTime(courseStringDTO.getTime());
+        courseDTO.setDescription(courseStringDTO.getDescription());
         return modelMapper.map(courseDTO, Course.class);
     }
 
