@@ -20,6 +20,7 @@ public class StatisticService {
     CourseRepository courseRepository;
     UserRepository userRepository;
     ValidationException validationException;
+    AdminService adminService;
 
     public Course favoriteCourse(Long idUser, Long idCourse) {
         Optional<User> userOpt = userRepository.findById(idUser);
@@ -72,10 +73,12 @@ public class StatisticService {
             Course course = courseOpt.get();
             if(userOpt.get().getCourseDoing().contains(course)){
                 throw new CourseNotFoundException("This course is already  doing ");}
-                course.getUsers().add(userOpt.get());
-                return courseRepository.save(course);
-        }
 
+            course.getUsers().add(userOpt.get());
+            adminService.roadDoing(course,userOpt.get());
+            adminService.themeDoing(course, userOpt.get());
+            return courseRepository.save(course);
+        }
         throw new CourseNotFoundException("This course cant be find");
     }
 
@@ -104,6 +107,8 @@ public class StatisticService {
                 throw new CourseNotFoundException("This course is already  done ");}
                 course.getUsers().add(userOpt.get());
                 course.getUserDoing().remove(userOpt.get());
+                adminService.themeDone(course, userOpt.get());
+                adminService.roadDone(course, userOpt.get());
                 return courseRepository.save(course);
             
             

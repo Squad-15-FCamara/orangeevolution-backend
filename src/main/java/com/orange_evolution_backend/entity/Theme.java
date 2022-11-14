@@ -7,6 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
@@ -35,4 +39,20 @@ public class Theme {
 
     @OneToMany(mappedBy = "theme")
     private Collection<Course> courses;
+
+    @ManyToOne
+    @JoinColumn(name = "road_Id")
+    private Road roadTheme;
+
+    @ManyToMany
+    @JoinTable(name = "doingTheme",
+    joinColumns = @JoinColumn(name = "theme_id"),
+    inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private Collection<User> userDoingTheme;
+
+    @ManyToMany
+    @JoinTable(name = "doneTheme",
+    joinColumns = @JoinColumn(name = "theme_id"),
+    inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private Collection<User> userDoneTheme;
 }

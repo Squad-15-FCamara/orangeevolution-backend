@@ -51,4 +51,42 @@ public class StatisticAdminController {
     public ResponseEntity<Long> countAllCoursers(){
         return ResponseEntity.ok(statisticAdminService.counterAllCourses());
     }
+
+    @ApiOperation(value = "Count Users doing a road")
+    @GetMapping("/counter/user/doing/road/{name}")
+    public ResponseEntity<Long> counterUserDoingRoad(@PathVariable String name){
+        return ResponseEntity.ok(statisticAdminService.counterUserDoingRoad(name));
+    }
+
+    @ApiOperation(value = "Count Users done a road")
+    @GetMapping("/counter/user/done/road/{name}")
+    public ResponseEntity<Long> counterUserDoneRoad(@PathVariable String name){
+        return ResponseEntity.ok(statisticAdminService.counterUserDoneRoad(name));
+    }
+
+    @ApiOperation(value = "Counter Users didnt a road")
+    @GetMapping("/counter/user/didnt/road/{name}")
+    public ResponseEntity<Long> counterUserDidntRoad(@PathVariable String name){
+        return ResponseEntity.ok(statisticAdminService.counterUserDidntRoad(name));
+    }
+
+    @ApiOperation(value = "Counter Users doing a theme")
+    @GetMapping("/counter/user/doing/theme/{name}")
+    public ResponseEntity<Long> counterUserDoingTheme(@PathVariable String name){
+        return ResponseEntity.ok(statisticAdminService.counterUserDoingTheme(name));
+    }
+
+    @ApiOperation(value = "Counter Users done a theme")
+    @GetMapping("/counter/user/done/theme/{name}")
+    public ResponseEntity<Long> counterUserDoneTheme(@PathVariable String name){
+        return ResponseEntity.ok(statisticAdminService.counterUserDoneTheme(name));
+    }
+
+    @ApiOperation(value = "Counter Users didnt a theme")
+    @GetMapping("/counter/user/didnt/theme/{name}")
+    public ResponseEntity<Long> counterUsersDidntTheme(@PathVariable String name){
+        return ResponseEntity.ok(statisticAdminService.counterUserDidntTheme(name));
+    }
+
+
 }
