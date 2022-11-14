@@ -60,9 +60,15 @@ public class User {
 	private Collection<Course> courseDone;
 
 
-	@ManyToMany(mappedBy = "doingRoad")
-	private Collection<Road> roadDoing;
+	@ManyToMany(mappedBy = "userDoingRoad")
+	private Collection<Road> userDoingRoad;
 
-	@ManyToMany(mappedBy = "doneRoad")
-	private Collection<Road> roadDone;
+	@ManyToMany(mappedBy = "userDoneRoad")
+	private Collection<Road> userDoneRoad;
+
+	@ManyToMany(mappedBy = "userDoingTheme")
+	private Collection<Theme> userDoingTheme;
+	
+	@ManyToMany(mappedBy = "userDoneTheme")
+	private Collection<Theme> userDoneTheme;
 }

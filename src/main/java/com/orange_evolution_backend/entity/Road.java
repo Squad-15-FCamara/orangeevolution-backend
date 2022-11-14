@@ -43,15 +43,15 @@ public class Road {
     private Collection<Theme> themes;
     
     @ManyToMany
-    @JoinTable(name = "doingRoad",
+    @JoinTable(name = "doingRoadUser",
     joinColumns = @JoinColumn(name = "road_id"),
     inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private Collection<User> userDoing;
+    private Collection<User> userDoingRoad;
 
     @ManyToMany
-    @JoinTable(name = "doneRoad",
+    @JoinTable(name = "doneRoadUser",
     joinColumns = @JoinColumn(name = "road_id"),
     inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private Collection<User> userDone;
+    private Collection<User> userDoneRoad;
 
 }

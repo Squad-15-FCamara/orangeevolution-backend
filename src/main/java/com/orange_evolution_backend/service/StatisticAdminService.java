@@ -33,4 +33,7 @@ public class StatisticAdminService {
     public Long counterAllCourses(){
         return (long) courseRepository.findAll().size();
     }
+
+
+
 }
