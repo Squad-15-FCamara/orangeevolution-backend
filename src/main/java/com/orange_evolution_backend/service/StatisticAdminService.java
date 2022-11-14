@@ -38,32 +38,32 @@ public class StatisticAdminService {
         return (long) courseRepository.findAll().size();
     }
 
-    public Long counterUserDoingRoad(Long idRoad) {
-        return (long) roadRepoistory.findById(idRoad).get().getUserDoingRoad().size();
+    public Long counterUserDoingRoad(String road) {
+        return (long) roadRepoistory.findByName(road).getUserDoingRoad().size();
     }
 
-    public Long counterUserDoneRoad(Long idRoad) {
-        return (long) roadRepoistory.findById(idRoad).get().getUserDoneRoad().size();
+    public Long counterUserDoneRoad(String road) {
+        return (long) roadRepoistory.findByName(road).getUserDoneRoad().size();
     }
 
-    public Long counterUserDoingTheme(Long idTheme) {
-        return (long) roadRepoistory.findById(idTheme).get().getUserDoingRoad().size();
+    public Long counterUserDoingTheme(String theme) {
+        return (long) roadRepoistory.findByName(theme).getUserDoingRoad().size();
     }
 
-    public Long counterUserDoneTheme(Long idTheme) {
-        return (long) roadRepoistory.findById(idTheme).get().getUserDoneRoad().size();
+    public Long counterUserDoneTheme(String theme) {
+        return (long) roadRepoistory.findByName(theme).getUserDoneRoad().size();
     }
 
-    public Long counterUserDidntRoad(Long idRoad) {
+    public Long counterUserDidntRoad(String road) {
         return (long) (userRepository.findAll().size()
-                - (roadRepoistory.findById(idRoad).get().getUserDoingRoad().size()
-                        + roadRepoistory.findById(idRoad).get().getUserDoneRoad().size()));
+                - (roadRepoistory.findByName(road).getUserDoingRoad().size()
+                        + roadRepoistory.findByName(road).getUserDoneRoad().size()));
     }
 
-    public Long counterUserDidntTheme(Long idTheme) {
+    public Long counterUserDidntTheme(String theme) {
         return (long) (userRepository.findAll().size()
-                - (themeRepository.findById(idTheme).get().getUserDoingTheme().size() +
-                        themeRepository.findById(idTheme).get().getUserDoneTheme().size()));
+                - (themeRepository.findByName(theme).getUserDoingTheme().size() +
+                        themeRepository.findByName(theme).getUserDoneTheme().size()));
     }
 
 }

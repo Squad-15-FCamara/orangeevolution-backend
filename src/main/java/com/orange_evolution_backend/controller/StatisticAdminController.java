@@ -51,4 +51,24 @@ public class StatisticAdminController {
     public ResponseEntity<Long> countAllCoursers(){
         return ResponseEntity.ok(statisticAdminService.counterAllCourses());
     }
+
+    @ApiOperation(value = "Count Users doing a road")
+    @GetMapping("/counter/user/doing/road/{name}")
+    public ResponseEntity<Long> counterUserDoingRoad(@PathVariable String name){
+        return ResponseEntity.ok(statisticAdminService.counterUserDoingRoad(name));
+    }
+
+    @ApiOperation(value = "Count Users done a road")
+    @GetMapping("/counter/user/done/road/{name}")
+    public ResponseEntity<Long> counterUserDoneRoad(@PathVariable String name){
+        return ResponseEntity.ok(statisticAdminService.counterUserDoneRoad(name));
+    }
+
+    @ApiOperation(value = "counter Users didnt a road")
+    @GetMapping("/counter/user/didnt/road/{name}")
+    public ResponseEntity<Long> counterUserDidntRoad(@PathVariable String name){
+        return ResponseEntity.ok(statisticAdminService.counterUserDidntRoad(name));
+    }
+
+
 }
