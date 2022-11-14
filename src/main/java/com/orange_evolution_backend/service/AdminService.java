@@ -156,8 +156,17 @@ public class AdminService {
         theme.setName(themeP.getName());
         theme.setRoadTheme(themeP.getRoadTheme());
         return themeRepository.save(theme);
+    }
 
+    public Long findIdRoadByName(String name){
+        return roadRepoistory.findByName(name).getId();
+    }
 
+    public Long findIdThemeByName(String name){
+        return themeRepository.findByName(name).getId();
+    }
+    public Long findIdTypeByName(String name){
+        return typeRepository.findByName(name).getId();
     }
 
 }
