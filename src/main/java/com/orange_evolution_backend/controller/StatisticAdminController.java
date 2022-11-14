@@ -92,9 +92,14 @@ public class StatisticAdminController {
     }
 
     @ApiOperation(value = "Statics Themes to user by Road")
-    @GetMapping("/counter/statitcs/{id}")
+    @GetMapping("/counter/statitcs/roads/{id}")
     public ResponseEntity<List<StatisticDTO>> statistTheme(@PathVariable String id){
-        return ResponseEntity.ok(statisticAdminService.statisticTheme(id));
+        return ResponseEntity.ok(statisticAdminService.statisticThemeByRoad(id));
+    }
+    @ApiOperation(value = "Statics Courses to user by Theme")
+    @GetMapping("/counter/statistic/themes/{id}")
+    public ResponseEntity<List<StatisticDTO>> statisticCourseByTeme(@PathVariable String id){
+        return ResponseEntity.ok(statisticAdminService.statisticCourseBytheme(id));
     }
 
 
