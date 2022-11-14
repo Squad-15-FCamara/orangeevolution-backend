@@ -7,17 +7,22 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.orange_evolution_backend.dto.RoadDTO;
 import com.orange_evolution_backend.dto.ThemeDTO;
+import com.orange_evolution_backend.dto.ThemeStringDTO;
 import com.orange_evolution_backend.dto.TypeDTO;
 import com.orange_evolution_backend.entity.Road;
 import com.orange_evolution_backend.entity.Theme;
 import com.orange_evolution_backend.entity.Type;
+import com.orange_evolution_backend.repository.RoadRepoistory;
+import com.orange_evolution_backend.repository.ThemeRepository;
 import com.orange_evolution_backend.service.AdminService;
 
 import io.swagger.annotations.Api;
@@ -32,7 +37,9 @@ import lombok.AllArgsConstructor;
 @Api(description = "Admin Services HTTP methods", tags = "Admin Services")
 public class AdminController {
     AdminService adminService;
+    RoadRepoistory roadRepoistory;
     ModelMapper modelMapper;
+    ThemeRepository themeRepository;
 
     @ApiOperation(value = "Save a new Road")
     @PostMapping("/roads")
@@ -44,10 +51,10 @@ public class AdminController {
 
     @ApiOperation(value = "Save a new Theme")
     @PostMapping("/themes")
-    public ResponseEntity<ThemeDTO> createTheme(@RequestBody ThemeDTO themeDTO){
-        Theme theme = convertThemeToEntity(themeDTO);
+    public ResponseEntity<ThemeStringDTO> createTheme(@RequestBody ThemeStringDTO themeStringDTO){
+        Theme theme = convertThemeToEntity(themeStringDTO);
         Theme saved = adminService.saveTheme(theme);
-        return new ResponseEntity<ThemeDTO>(convertThemeToDTO(saved), HttpStatus.CREATED);
+        return new ResponseEntity<ThemeStringDTO>(convertThemeStringToDTO(saved), HttpStatus.CREATED);
     }
 
     @ApiOperation(value = "Save a new Type")
@@ -77,6 +84,23 @@ public class AdminController {
         return ResponseEntity.ok(adminService.findListNameType());
     }
 
+    @ApiOperation(value = "Fetch a theme")
+    @GetMapping("/themes/by/road/{nameThema}")
+    public ResponseEntity<ThemeDTO> getthemes(@PathVariable String nameThema){
+        Theme theme = themeRepository.findByName(nameThema);
+        return ResponseEntity.ok(convertThemeToDTO(theme));
+    }
+
+
+
+    @ApiOperation(value = "Update a theme")
+    @PutMapping("/update/theme/{nameTheme}")
+    public ResponseEntity<ThemeDTO> updateTheme(@RequestBody ThemeDTO themeDTO, @PathVariable Long nameTheme){
+        Theme theme = convertThemeToEntity(themeDTO);
+        Theme saved = adminService.updaTheme(theme, nameTheme);
+        return new ResponseEntity<ThemeDTO>(convertThemeToDTO(saved),HttpStatus.ACCEPTED);
+    }
+
     
 
     private RoadDTO convertRoadToDTO(Road road){
@@ -90,7 +114,22 @@ public class AdminController {
     private ThemeDTO convertThemeToDTO(Theme theme){
         return modelMapper.map(theme, ThemeDTO.class);
     }
-    public Theme convertThemeToEntity(ThemeDTO themeDTO){
+
+    private Theme convertThemeToEntity(ThemeDTO themeDTO){
+        return modelMapper.map(themeDTO, Theme.class);
+    }
+
+    private ThemeStringDTO convertThemeStringToDTO(Theme theme){
+        ThemeDTO themeDTO = convertThemeToDTO(theme);
+        ThemeStringDTO themeStringDTO = modelMapper.map(theme, ThemeStringDTO.class);
+        themeStringDTO.setNameRoad(adminService.nameRoad(themeDTO.getIdRoad()));
+        return themeStringDTO;
+    }
+    public Theme convertThemeToEntity(ThemeStringDTO themeStringDTO){
+        ThemeDTO themeDTO = new ThemeDTO();
+        themeDTO.setId(themeRepository.findByName(themeStringDTO.getName()).getId());
+        themeDTO.setName(themeStringDTO.getName());
+        themeDTO.setIdRoad(roadRepoistory.findByName(themeStringDTO.getNameRoad()).getId());
         return modelMapper.map(themeDTO, Theme.class);
     }
 

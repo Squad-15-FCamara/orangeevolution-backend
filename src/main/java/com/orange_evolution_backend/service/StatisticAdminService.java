@@ -1,11 +1,15 @@
 package com.orange_evolution_backend.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.orange_evolution_backend.repository.CourseRepository;
 import com.orange_evolution_backend.repository.RoadRepoistory;
 import com.orange_evolution_backend.repository.ThemeRepository;
 import com.orange_evolution_backend.repository.UserRepository;
+import com.orange_evolution_backend.dto.StatisticDTO;
 
 import lombok.AllArgsConstructor;
 
@@ -16,7 +20,7 @@ public class StatisticAdminService {
     UserRepository userRepository;
     RoadRepoistory roadRepoistory;
     ThemeRepository themeRepository;
-
+    AdminService adminService;
     public Long counterUserDoing(Long idCourse) {
         return (long) courseRepository.findById(idCourse).get().getUserDoing().size();
     }
@@ -47,11 +51,11 @@ public class StatisticAdminService {
     }
 
     public Long counterUserDoingTheme(String theme) {
-        return (long) roadRepoistory.findByName(theme).getUserDoingRoad().size();
+        return (long) themeRepository.findByName(theme).getUserDoingTheme().size();
     }
 
     public Long counterUserDoneTheme(String theme) {
-        return (long) roadRepoistory.findByName(theme).getUserDoneRoad().size();
+        return (long) themeRepository.findByName(theme).getUserDoneTheme().size();
     }
 
     public Long counterUserDidntRoad(String road) {
@@ -65,5 +69,33 @@ public class StatisticAdminService {
                 - (themeRepository.findByName(theme).getUserDoingTheme().size() +
                         themeRepository.findByName(theme).getUserDoneTheme().size()));
     }
+    
 
+    public List<StatisticDTO> statisticThemeByRoad(String road){
+        List<StatisticDTO> statistic = new ArrayList<StatisticDTO>();
+        roadRepoistory.findByName(road).getThemes().stream().forEach(theme -> {
+            String name = theme.getName();
+            Long doing = counterUserDoingTheme(name);
+            Long done = counterUserDoneTheme(name);
+            Long didnt = counterUserDidntTheme(name);
+            StatisticDTO save = new StatisticDTO(name,doing,done,didnt);
+            statistic.add(save);
+        });
+
+        
+        return statistic;
+    }
+
+    public List<StatisticDTO> statisticCourseBytheme(String theme){
+        List<StatisticDTO> statistic = new ArrayList<StatisticDTO>();
+        themeRepository.findByName(theme).getCourses().forEach(course ->{
+            String name = course.getTitle();
+            Long doing = counterUserDoing(course.getId());
+            Long done = counterUserDone(course.getId());
+            Long didnt = counterUserDidnt(course.getId());
+            StatisticDTO save = new StatisticDTO(name, doing, done, didnt);
+            statistic.add(save);
+        });
+        return statistic;
+    }
 }
