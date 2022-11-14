@@ -3,6 +3,8 @@ package com.orange_evolution_backend.service;
 import org.springframework.stereotype.Service;
 
 import com.orange_evolution_backend.repository.CourseRepository;
+import com.orange_evolution_backend.repository.RoadRepoistory;
+import com.orange_evolution_backend.repository.ThemeRepository;
 import com.orange_evolution_backend.repository.UserRepository;
 
 import lombok.AllArgsConstructor;
@@ -12,6 +14,8 @@ import lombok.AllArgsConstructor;
 public class StatisticAdminService {
     CourseRepository courseRepository;
     UserRepository userRepository;
+    RoadRepoistory roadRepoistory;
+    ThemeRepository themeRepository;
 
     public Long counterUserDoing(Long idCourse) {
         return (long) courseRepository.findById(idCourse).get().getUserDoing().size();
@@ -33,6 +37,12 @@ public class StatisticAdminService {
     public Long counterAllCourses(){
         return (long) courseRepository.findAll().size();
     }
+
+    public Long counterUserDoingRoad(Long idRoad){
+        return (long) roadRepoistory.findById(idRoad).get().getUserDoingRoad().size();
+    }
+
+
 
 
 
