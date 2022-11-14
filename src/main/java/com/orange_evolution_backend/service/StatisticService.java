@@ -73,6 +73,7 @@ public class StatisticService {
             Course course = courseOpt.get();
             if(userOpt.get().getCourseDoing().contains(course)){
                 throw new CourseNotFoundException("This course is already  doing ");}
+            course.getUserDoing().add(userOpt.get());
             adminService.roadDoing(course,userOpt.get());
             adminService.themeDoing(course, userOpt.get());
             course.getUserDoing().add(userOpt.get());
