@@ -116,6 +116,7 @@ public class AdminService {
         Road road = course.getRoad();
         if(!road.getUserDoingRoad().contains(user)){
             road.getUserDoingRoad().add(user);
+            roadRepoistory.save(road);
            
         }
     }
