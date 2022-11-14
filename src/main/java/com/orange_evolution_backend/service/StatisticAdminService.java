@@ -42,6 +42,10 @@ public class StatisticAdminService {
         return (long) roadRepoistory.findById(idRoad).get().getUserDoingRoad().size();
     }
 
+    public Long counterUserDoneRoad(Long idRoad){
+        return (long) roadRepoistory.findById(idRoad).get().getUserDoneRoad().size();
+    }
+
 
 
 
