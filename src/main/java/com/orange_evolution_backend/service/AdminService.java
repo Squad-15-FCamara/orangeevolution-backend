@@ -100,27 +100,23 @@ public class AdminService {
 
     }
 
-    public Theme themeDoing(Course course, User user){
+    public void themeDoing(Course course, User user){
         Theme theme = course.getTheme();
         if(!theme.getUserDoingTheme().contains(user)){
             theme.getUserDoingTheme().add(user);
-            return themeRepository.save(theme);
+            themeRepository.save(theme);
         }
-
-        return theme;
     }
 
-    public Road roadDoing(Course course, User user){
+    public void roadDoing(Course course, User user){
         Road road = course.getRoad();
         if(!road.getUserDoingRoad().contains(user)){
             road.getUserDoingRoad().add(user);
-            return roadRepoistory.save(road);
+           
         }
-
-        return road;
     }
 
-    public Theme themeDone(Course course, User user){
+    public void themeDone(Course course, User user){
         Theme theme = course.getTheme();
         List<Course> courses = new ArrayList<>();
         theme.getCourses().forEach(courseL ->{
@@ -131,13 +127,11 @@ public class AdminService {
         if(courses.isEmpty()){
             theme.getUserDoingTheme().remove(user);
             theme.getUserDoneTheme().add(user);
-            return themeRepository.save(theme);
+            themeRepository.save(theme);
         }
-
-        return theme;
     }
 
-    public Road roadDone(Course course, User user){
+    public void roadDone(Course course, User user){
         Road road =  course.getRoad();
         List<Theme> themes = new ArrayList<>();
         road.getThemes().forEach(theme ->{
@@ -148,10 +142,8 @@ public class AdminService {
         if(themes.isEmpty()){
             road.getUserDoingRoad().remove(user);
             road.getUserDoneRoad().add(user);
-            return roadRepoistory.save(road);
+            roadRepoistory.save(road);
         }
-
-        return road;
     }
 
 }

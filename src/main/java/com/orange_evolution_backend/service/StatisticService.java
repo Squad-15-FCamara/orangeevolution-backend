@@ -73,9 +73,9 @@ public class StatisticService {
             Course course = courseOpt.get();
             if(userOpt.get().getCourseDoing().contains(course)){
                 throw new CourseNotFoundException("This course is already  doing ");}
-            course.getUsers().add(userOpt.get());
             adminService.roadDoing(course,userOpt.get());
             adminService.themeDoing(course, userOpt.get());
+            course.getUserDoing().add(userOpt.get());
             return courseRepository.save(course);
         }
         throw new CourseNotFoundException("This course cant be find");
@@ -104,7 +104,7 @@ public class StatisticService {
             Course course = courseOpt.get();
             if(userOpt.get().getCourseDone().contains(course)){
                 throw new CourseNotFoundException("This course is already  done ");}
-                course.getUsers().add(userOpt.get());
+                course.getUserDone().add(userOpt.get());
                 course.getUserDoing().remove(userOpt.get());
                 adminService.themeDone(course, userOpt.get());
                 adminService.roadDone(course, userOpt.get());
