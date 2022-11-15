@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class StatisticDTO {
 
     private String name;
+    private String idRoad;
     private Long doing;
     private Long done;
     private Long didnt;

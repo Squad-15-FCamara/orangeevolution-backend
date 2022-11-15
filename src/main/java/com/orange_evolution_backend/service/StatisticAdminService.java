@@ -92,7 +92,8 @@ public class StatisticAdminService {
             Long doing = counterUserDoingTheme(name);
             Long done = counterUserDoneTheme(name);
             Long didnt = counterUserDidntTheme(name);
-            StatisticDTO save = new StatisticDTO(name,doing,done,didnt);
+            String idRoad = theme.getRoadTheme().getName();
+            StatisticDTO save = new StatisticDTO(name, idRoad, doing, done, didnt);
             statistic.add(save);
         });
 
@@ -107,7 +108,8 @@ public class StatisticAdminService {
             Long doing = counterUserDoing(course.getId());
             Long done = counterUserDone(course.getId());
             Long didnt = counterUserDidnt(course.getId());
-            StatisticDTO save = new StatisticDTO(name, doing, done, didnt);
+            String idRoad = course.getRoad().getName();
+            StatisticDTO save = new StatisticDTO(name,idRoad, doing, done, didnt);
             statistic.add(save);
         });
         return statistic;
@@ -122,7 +124,8 @@ public class StatisticAdminService {
                 Long doing = counterUserDoing(course.getId());
                 Long done = counterUserDone(course.getId());
                 Long didnt = counterUserDidnt(course.getId());
-                StatisticDTO save = new StatisticDTO(name, doing, done, didnt);
+                String idRoad = course.getRoad().getName();
+                StatisticDTO save = new StatisticDTO(name, idRoad, doing, done, didnt);
                 returnCourse.add(save);
             }
         });
