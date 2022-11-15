@@ -1,3 +1,5 @@
+//Aqui serve como Endpoints para os metodos de userServicec
+
 package com.orange_evolution_backend.controller;
 
 
@@ -33,10 +35,14 @@ import lombok.AllArgsConstructor;
 @Api(description = "User HTTP methods", tags = "Users")
 public class UserController {
 
+	// Aqui está chamando os serviços que serão necessários para o funcionamento  da classe, seus contrutores estão sendo gerados de "@AllArgosConstructor"
 	private UserService userService;
 	private UserRepository userRepository;
 	private ModelMapper modelMapper;
 	
+
+	// Usa o serviço de UserService e e também os convertores de DTO para que retorne
+    // todos os usuarios cadastrados no banco em formato de Usuario DTO.
 	@ApiOperation(value = "Fetch all users")
 	@GetMapping
 	public ResponseEntity<List<UserDTO>> getAllUsers() {
@@ -44,6 +50,8 @@ public class UserController {
 		return ResponseEntity.ok(converUsersToListDTO(users));
 	}
 	
+	// Usa o serviço de UserService e e também os convertores de DTO para que retorne
+    // todos os usuarios cadastrados no banco em formato de Usuario DTO.
 	@ApiOperation(value = "Fetch an user by ID")
 	@GetMapping("/{userId}")
 	public ResponseEntity<UserDTO> getUserById(@PathVariable Long userId) {
@@ -51,6 +59,9 @@ public class UserController {
 		return ResponseEntity.ok(convertUserToDTO(user));
 	}
 	
+	// Usa o serviço de UserService e os conversores DTO para
+	// criar um novo usuario Recebe um corpo de Usuario DTO.
+	// Deve retornar o Usuario DTO e uma resposta HTTP 201. 
 	@ApiOperation(value = "Create and save an user")
 	@PostMapping
 	public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
@@ -59,6 +70,9 @@ public class UserController {
 		return new ResponseEntity<UserDTO>(convertUserToDTO(saved), HttpStatus.CREATED);
 	}
 	
+	// Usa o servico de UserService e os conversores DTO para atualizar 
+	// um usuario recebendo um corpo de Usuario DTO.
+	// Deve retornar o usuario DTO e uma resposta HTTP 200.
 	@ApiOperation(value = "Update an user")
 	@PutMapping("/{userId}")
 	public ResponseEntity<UserDTO> updateUser(@PathVariable Long userId, @RequestBody UserDTO userDTO) {
@@ -71,7 +85,9 @@ public class UserController {
 
 		return ResponseEntity.ok(convertUserToDTO(user));
 	}
-	
+	// Usa o servico de UserService para remover um Usuario
+	// Recebe o ID usuario para remover.
+	// Deve retornar uma resposta HTTP 204.
 	@ApiOperation(value = "Delete an user")
 	@DeleteMapping("/{userId}")
 	public ResponseEntity<Void> deleteUser(@PathVariable Long userId) {
@@ -84,7 +100,8 @@ public class UserController {
 		return ResponseEntity.noContent().build();
 	}
 
-	
+	// Usa ModelMapper para converter uma Lista de Usuario
+	// em uma lista de Usuario DTO.
     public List<UserDTO> converUsersToListDTO(List<User> users){
         List<UserDTO> returnUsersDTO = new ArrayList<>();
         users.forEach(user ->{
@@ -92,10 +109,12 @@ public class UserController {
         });
         return returnUsersDTO;
     }
-
+	// Usa ModelMapper para converter um Usuario em Usuario DTO 
     public UserDTO convertUserToDTO(User user){
         return modelMapper.map(user, UserDTO.class);
     }
+
+	// Usa ModelMapper para converter um Usuario DTO em Usuario
     public User converUserToEntity(UserDTO userDTO){
         return modelMapper.map(userDTO, User.class);
     }
