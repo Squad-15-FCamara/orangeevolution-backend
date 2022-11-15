@@ -1,3 +1,5 @@
+// Este Servico serve para operacoes relacionadas com Usuarios.
+
 package com.orange_evolution_backend.service;
 
 import java.util.List;
@@ -17,13 +19,17 @@ import lombok.Data;
 @AllArgsConstructor
 public class UserService {
 	
+	// Aqui está chamando os serviços que serão necessários para o funcionamento  da classe, seus contrutores estão sendo gerados de "@AllArgosConstructor"	
 	private UserRepository userRepository;
 	
+	// Busca todos os Usuarios.
 	public List<User> findAllUsers() {
 		
 		return userRepository.findAll();
 	}
 	
+
+	// Busca um usuario por ID.
 	public User findUserById(Long userId) {
 		
 		return userRepository.findById(userId)
@@ -31,12 +37,14 @@ public class UserService {
 						"Este usuário não existe!"));
 	}
 	
+	// Salva um novo Usuario.
 	public User saveUser(User user) {
 		
 		userRepository.save(user);
 		return user;
 	}
 	
+	// Deleta um Usuario.
 	public void deleteUser(Long userId) {
 		
 		userRepository.deleteById(userId);
