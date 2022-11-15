@@ -51,7 +51,7 @@ public class AdminController {
 
     @ApiOperation(value = "Save a new Theme")
     @PostMapping("/themes")
-    public ResponseEntity<ThemeStringDTO> createTheme(@RequestBody ThemeStringDTO themeStringDTO){
+    public ResponseEntity<ThemeStringDTO> createTheme(@RequestBody ThemeDTO themeStringDTO){
         Theme theme = convertThemeToEntity(themeStringDTO);
         Theme saved = adminService.saveTheme(theme);
         return new ResponseEntity<ThemeStringDTO>(convertThemeStringToDTO(saved), HttpStatus.CREATED);
@@ -125,7 +125,7 @@ public class AdminController {
         themeStringDTO.setNameRoad(adminService.nameRoad(themeDTO.getIdRoad()));
         return themeStringDTO;
     }
-    public Theme convertThemeToEntity(ThemeStringDTO themeStringDTO){
+    public Theme convertThemeStringToEntity(ThemeStringDTO themeStringDTO){
         ThemeDTO themeDTO = new ThemeDTO();
         themeDTO.setId(themeRepository.findByName(themeStringDTO.getName()).getId());
         themeDTO.setName(themeStringDTO.getName());

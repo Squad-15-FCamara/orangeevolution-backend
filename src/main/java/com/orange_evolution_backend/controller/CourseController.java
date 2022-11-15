@@ -47,9 +47,9 @@ public class CourseController {
 
     @ApiOperation(value = "Fetch a course by ID")
     @GetMapping("/{idCourse}")
-    public ResponseEntity<CourseDTO> getCourseById(@PathVariable Long idCourse) {
+    public ResponseEntity<CourseStingDTO> getCourseById(@PathVariable Long idCourse) {
         Course course = courseService.findCourseByID(idCourse);
-        return ResponseEntity.ok(convertCourseToDTO(course));
+        return ResponseEntity.ok(convertCourseStringDTO(course));
     }
 
     @ApiOperation(value = "Fetch a course by time atribute")
@@ -142,20 +142,6 @@ public class CourseController {
         return modelMapper.map(courseDTO, Course.class);
     }
 
-    public Course converCourseStringToEntity(CourseStingDTO courseStringDTO){
-        CourseDTO courseDTO = new CourseDTO();
-        courseDTO.setIdRoad(adminService.findIdRoadByName(courseStringDTO.getIdRoad()));
-        courseDTO.setIdTheme(adminService.findIdThemeByName(courseStringDTO.getIdTheme()));
-        courseDTO.setIdType(adminService.findIdTypeByName(courseStringDTO.getIdType()));
-        courseDTO.setId(courseStringDTO.getId());
-        courseDTO.setAuthor(courseStringDTO.getAuthor());
-        courseDTO.setLink(courseStringDTO.getLink());
-        courseDTO.setTitle(courseStringDTO.getTitle());
-        courseDTO.setTags(courseStringDTO.getTags());
-        courseDTO.setTime(courseStringDTO.getTime());
-        courseDTO.setDescription(courseStringDTO.getDescription());
-        return modelMapper.map(courseDTO, Course.class);
-    }
 
     public List<CourseStingDTO> converCoursesStringToListDTO(List<Course> courses){
         List<CourseStingDTO> returnCoursesDTO = new ArrayList<>();
@@ -179,5 +165,20 @@ public class CourseController {
         return courseStingDTO;
     }
 
+
+    public Course converCourseStringToEntity(CourseStingDTO courseStringDTO){
+        CourseDTO courseDTO = new CourseDTO();
+        courseDTO.setIdRoad(adminService.findIdRoadByName(courseStringDTO.getIdRoad()));
+        courseDTO.setIdTheme(adminService.findIdThemeByName(courseStringDTO.getIdTheme()));
+        courseDTO.setIdType(adminService.findIdTypeByName(courseStringDTO.getIdType()));
+        courseDTO.setId(courseStringDTO.getId());
+        courseDTO.setAuthor(courseStringDTO.getAuthor());
+        courseDTO.setLink(courseStringDTO.getLink());
+        courseDTO.setTitle(courseStringDTO.getTitle());
+        courseDTO.setTags(courseStringDTO.getTags());
+        courseDTO.setTime(courseStringDTO.getTime());
+        courseDTO.setDescription(courseStringDTO.getDescription());
+        return modelMapper.map(courseDTO, Course.class);
+    }
 
 }
