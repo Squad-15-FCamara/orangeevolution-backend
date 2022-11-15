@@ -1,3 +1,9 @@
+// Este é o objeto para salvar os Usuarios, nele será salvo o Id, Nome, Trabalho e se é um Administrador
+
+// // Daqui também será gerado as tabelas de Relacionamento no banco para as tabelas de Cursos Favoritos, 
+// Cursos em Andamento, Cursos Feitos, Trilhas em Andamento, Trilhas Feitas, Temas em andamento, Temas Feitos
+
+
 package com.orange_evolution_backend.entity;
 
 import java.util.Collection;

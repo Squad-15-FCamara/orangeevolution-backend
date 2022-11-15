@@ -1,3 +1,10 @@
+// // Este é o objeto para os conteudos da aplicação, nele será armazenado os 
+// atributos do Id, Titulo,Trilha,Tema,Tipo,Autor ,Tempo ,Tag ,Link e Descricao em sua tabela do Banco de dados.
+
+
+// // Aqui também poderá ser acessado as tabelas relacionais entre Usuarios e 
+// Cursos que são divididas em 3 tableas, as dos conteudos favoritados, em progresso e terminados.
+
 package com.orange_evolution_backend.entity;
 
 import java.util.Collection;
