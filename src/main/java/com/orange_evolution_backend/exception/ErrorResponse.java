@@ -1,3 +1,5 @@
+//Objeto para captar a mensagem e o campo de erros
+
 package com.orange_evolution_backend.exception;
 
 import java.util.ArrayList;
