@@ -1,3 +1,5 @@
+//Este objeto serve para retornar um objeto que entrega as estátisticas de algum objeto que seja solicitado
+
 package com.orange_evolution_backend.dto;
 
 import lombok.AllArgsConstructor;
