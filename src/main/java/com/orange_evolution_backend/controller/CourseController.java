@@ -143,21 +143,6 @@ public class CourseController {
     }
 
 
-    public Course converCourseStringToEntity(CourseStingDTO courseStringDTO){
-        CourseDTO courseDTO = new CourseDTO();
-        courseDTO.setIdRoad(adminService.findIdRoadByName(courseStringDTO.getIdRoad()));
-        courseDTO.setIdTheme(adminService.findIdThemeByName(courseStringDTO.getIdTheme()));
-        courseDTO.setIdType(adminService.findIdTypeByName(courseStringDTO.getIdType()));
-        courseDTO.setId(courseStringDTO.getId());
-        courseDTO.setAuthor(courseStringDTO.getAuthor());
-        courseDTO.setLink(courseStringDTO.getLink());
-        courseDTO.setTitle(courseStringDTO.getTitle());
-        courseDTO.setTags(courseStringDTO.getTags());
-        courseDTO.setTime(courseStringDTO.getTime());
-        courseDTO.setDescription(courseStringDTO.getDescription());
-        return modelMapper.map(courseDTO, Course.class);
-    }
-
     public List<CourseStingDTO> converCoursesStringToListDTO(List<Course> courses){
         List<CourseStingDTO> returnCoursesDTO = new ArrayList<>();
         courses.forEach(course ->{
