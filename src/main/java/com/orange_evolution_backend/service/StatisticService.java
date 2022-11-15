@@ -1,3 +1,4 @@
+// Este Servico serve para metodos de estatistica e atualizações para Conteudos "Favoritados", "em andamento" e "Finalizados" que sejam relacionados aos Conteudos, Usuarios.
 package com.orange_evolution_backend.service;
 
 import java.util.List;
@@ -17,11 +18,16 @@ import lombok.AllArgsConstructor;
 @Service
 @AllArgsConstructor
 public class StatisticService {
+
+    // Aqui está chamando os serviços que serão necessários para o funcionamento  da classe, seus contrutores estão sendo gerados de "@AllArgosConstructor"
     CourseRepository courseRepository;
     UserRepository userRepository;
     ValidationException validationException;
     AdminService adminService;
 
+
+    // Adicionar um Conteudo aos Favoritos de um Usuario.
+    // Recebe o Id do Usuario e o Id do curso como parametro.
     public Course favoriteCourse(Long idUser, Long idCourse) {
         Optional<User> userOpt = userRepository.findById(idUser);
         Optional<Course> courseOpt = courseRepository.findById(idCourse);
@@ -38,6 +44,8 @@ public class StatisticService {
         throw new CourseNotFoundException("This course cant be favorited" );
     }
 
+    // Procura os Favoritos de um Usuario.
+    // Rececbe o Id do Usuario como parametro.
     public List<Course> findFavoritesCoursesByIdUser(Long idUser) {
         User user = userRepository.findById(idUser).get();
         List<Course> favoritCourses = (List<Course>) user.getCourses();
@@ -45,6 +53,8 @@ public class StatisticService {
         return favoritCourses;
     }
 
+    // Deleta um Favorito de um Usuario.
+    // Recebe o Id do Usuario e o Id do Conteudo como parametro.
     public void deleteFavoriteCourse(Long idUser, Long idCourse) {
         User user = userRepository.findById(idUser).get();
         Course course = courseRepository.findById(idCourse).get();
@@ -54,6 +64,8 @@ public class StatisticService {
         userRepository.save(user);
     }
 
+    // Deleta todos os Favoritos de um Usuario.
+    // Recebe o Id do usuario como parametro.
     public User deleteAllFavoriteCourse(Long idUser) {
         User user = userRepository.findById(idUser).get();
         user.getCourses().forEach(course -> {
@@ -66,6 +78,8 @@ public class StatisticService {
         return userRepository.save(user);
     }
 
+    // Adicionar um Conteudo em "Andamento".
+    // Recebe o Id do Usuario e o Id do Conteudo como parametro.
     public Course doingCourse(Long idUser, Long idCourse) {
         Optional<User> userOpt = userRepository.findById(idUser);
         Optional<Course> courseOpt = courseRepository.findById(idCourse);
@@ -81,6 +95,8 @@ public class StatisticService {
         throw new CourseNotFoundException("This course cant be find");
     }
 
+    // Deleta um conteudo em "Andamento".
+    // Recebe o Id do Usuario e o Id do Conteudo como parametro.
     public void deleteDoingCourse(Long idUser, Long idCourse) {
         User user = userRepository.findById(idUser).get();
         Course course = courseRepository.findById(idCourse).get();
@@ -90,6 +106,8 @@ public class StatisticService {
         userRepository.save(user);
     }
 
+    // Busca todos os conteudos em Andamento de um Usuario.
+    // Recebe o Id do Usuario como parametro.
     public List<Course> findDoingCoursesByIdUser(Long idUser) {
         User user = userRepository.findById(idUser).get();
         List<Course> doingCourses = (List<Course>) user.getCourseDoing();
@@ -97,6 +115,8 @@ public class StatisticService {
         return doingCourses;
     }
 
+    // Salva um Conteudo em Finalizado e remove o mesmo conteudo de "Andamento".
+    // Recebe id Usuario e Id conteudo como parametro.
     public Course doneCourse(Long idUser, Long idCourse) {
         Optional<User> userOpt = userRepository.findById(idUser);
         Optional<Course> courseOpt = courseRepository.findById(idCourse);
@@ -115,12 +135,16 @@ public class StatisticService {
         throw new CourseNotFoundException("This course cant be find");
     }
 
+    // Busca todos os Conteudos Finalizados de um Usuario.
+    // Recebe o Id Usuario como parametro.
     public List<Course> findDoneCourseByIdUser(Long idUser) {
         User user = userRepository.findById(idUser).get();
         List<Course> doneCourses = (List<Course>) user.getCourseDone();
         return doneCourses;
     }
 
+    // Deleta um Conteudo de Finalizado de um Usuario.
+    // Recebe o Id usuario e Id Conteudo como parametro.
     public void deleteDoneCourse(Long idUser, Long idCourse) {
         User user = userRepository.findById(idUser).get();
         Course course = courseRepository.findById(idCourse).get();
