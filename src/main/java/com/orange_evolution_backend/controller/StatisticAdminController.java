@@ -102,6 +102,12 @@ public class StatisticAdminController {
         return ResponseEntity.ok(statisticAdminService.statisticCourseBytheme(id));
     }
 
+    @ApiOperation(value = "Fetch a statistic course by title")
+    @GetMapping("/counter/statistic/titles/{title}")
+    public ResponseEntity<List<StatisticDTO>> getCoursesByTitle(@PathVariable String title){
+        return ResponseEntity.ok(statisticAdminService.findCourseByTitle(title));
+    }
+
 
 
 
