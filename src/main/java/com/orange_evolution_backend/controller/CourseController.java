@@ -1,3 +1,5 @@
+//Aqui serve para os Endpoints para os serviços de CourseService.
+
 package com.orange_evolution_backend.controller;
 
 import java.util.ArrayList;
@@ -33,11 +35,14 @@ import lombok.AllArgsConstructor;
 @Api(description = "Course HTTP methods", tags = "Courses")
 public class CourseController {
 
+    // Aqui está chamando os serviços que serão necessários para o funcionamento  da classe, seus contrutores estão sendo gerados de "@AllArgosConstructor"
     private CourseService courseService;
     private CourseRepository courseRepository;
     private AdminService adminService;
     private ModelMapper modelMapper;
 
+    // Usa o serviço de CourseService e e também os convertores de DTO para que retorne
+    // todos os conteudos salvos no banco em formato de Conteudo DTO.
     @ApiOperation(value = "Fetch all courses")
     @GetMapping
     public ResponseEntity<List<CourseStingDTO>> getAllCourses() {
@@ -45,6 +50,8 @@ public class CourseController {
         return ResponseEntity.ok(converCoursesStringToListDTO(courses));
     }
 
+    // Usa o serviço de CourseService e e também os convertores de DTO para que realize
+    // uma busca de conteudo salvo no banco por ID e retorne em formato de Conteudo DTO.
     @ApiOperation(value = "Fetch a course by ID")
     @GetMapping("/{idCourse}")
     public ResponseEntity<CourseStingDTO> getCourseById(@PathVariable Long idCourse) {
@@ -52,6 +59,9 @@ public class CourseController {
         return ResponseEntity.ok(convertCourseStringDTO(course));
     }
 
+    // Usa o serviço de CourseService e e também os convertores de DTO para que realize
+    // uma busca dos conteuds salvos no banco que tenham um valor igual ou menor do Tempo
+    // passado e retorne em formato de Conteudo DTO.
     @ApiOperation(value = "Fetch a course by time atribute")
     @GetMapping("/times/{time}")
     public ResponseEntity<List<CourseStingDTO>> getCoursesByTime(@PathVariable Long time) {
@@ -59,6 +69,8 @@ public class CourseController {
         return ResponseEntity.ok(converCoursesStringToListDTO(courses));
     }
 
+    // Usa o serviço de CourseService e e também os convertores de DTO para que realize
+    // uma busca dos conteudos salvo no banco por tag e retorne em formato de Conteudo DTO.
     @ApiOperation(value = "Fetch a course by tag")
     @GetMapping("/tags/{tag}")
     public ResponseEntity<List<CourseStingDTO>> getCoursesByTag(@PathVariable String tag) {
@@ -66,15 +78,18 @@ public class CourseController {
         return ResponseEntity.ok(converCoursesStringToListDTO(courses));
     }
 
+    // Usa o serviço de CourseService e e também os convertores de DTO para que realize
+    // uma busca dos conteudos salvo no banco por Trilha e retorne em formato de Conteudo DTO.
     @ApiOperation(value = "Fetch a course by road")
     @GetMapping("/roads/{road}")
-
     public ResponseEntity<List<CourseStingDTO>> getCoursesByRoad(@PathVariable String road) {
         List<Course> courses = adminService.findAllCoursesByRoad(road);
         return ResponseEntity.ok(converCoursesStringToListDTO(courses));
 
     }
 
+    // Usa o serviço de CourseService e e também os convertores de DTO para que realize
+    // uma busca dos conteudos salvo no banco por tema e retorne em formato de Conteudo DTO.
     @ApiOperation(value = "Fetch a course by theme")
     @GetMapping("/themes/{theme}")
     public ResponseEntity<List<CourseStingDTO>> getCoursesByTheme(@PathVariable String theme) {
@@ -83,6 +98,8 @@ public class CourseController {
 
     }
 
+    // Usa o serviço de CourseService e e também os convertores de DTO para que realize
+    // uma busca dos conteudos salvo no banco por autor e retorne em formato de Conteudo DTO.
     @ApiOperation(value = "Fetch a course by author")
     @GetMapping("/authors/{author}")
     public ResponseEntity<List<CourseStingDTO>> getCoursesByAuthor(@PathVariable String author) {
@@ -90,14 +107,17 @@ public class CourseController {
         return ResponseEntity.ok(converCoursesStringToListDTO(courses));
     }
 
+    // Usa o serviço de CourseService e e também os convertores de DTO para que realize
+    // uma busca dos conteudos salvo no banco por tipo e retorne em formato de Conteudo DTO.
     @ApiOperation(value = "Fetch a course by type")
     @GetMapping("/types/{type}")
-
     public ResponseEntity<List<CourseStingDTO>> getCoursesByType(@PathVariable String type) {
         List<Course> courses = adminService.findAllCoursesByType(type);
         return ResponseEntity.ok(converCoursesStringToListDTO(courses));
     }
 
+    // Usa o serviço de CourseService e e também os convertores de DTO para que realize
+    // uma busca dos conteudos salvo no banco por titulo e retorne em formato de Conteudo DTO.
     @ApiOperation(value = "Fetch a course by title")
     @GetMapping("/titles/{title}")
     public ResponseEntity<List<CourseStingDTO>> getCoursesByTitle(@PathVariable String title){
@@ -105,6 +125,8 @@ public class CourseController {
         return ResponseEntity.ok(converCoursesStringToListDTO(courses));
     }
 
+    // Usa o serviço de CourseService e os convertores de DTO e Entity para salvar um novo curso
+    // caso tenha sucesso na requisição deve retornar um 201 como resposta HTTPS e o conteudo DTO
     @ApiOperation(value = "Create a course")
     @PostMapping
     public ResponseEntity<CourseStingDTO> createCourse(@RequestBody CourseStingDTO courseStringDTO) {
@@ -114,7 +136,8 @@ public class CourseController {
     }
 
 
-
+    // Usa o serviço de CourseService para deletar um conteúdo após receber um ID, caso 
+    // não encontre o ID retorna um 404 Se encontrar o ID e apagar não retorna nada.
     @ApiOperation(value = "Delete a course")
     @DeleteMapping("/{courseId}")
     public ResponseEntity<Void> deleteCourse(@PathVariable Long courseId) {
@@ -127,6 +150,9 @@ public class CourseController {
         return ResponseEntity.noContent().build();
     }
 
+
+    // Usa o serviço de ModelMapper para converter uma Lista de Conteudos
+    // em uma lista de Conteudos DTO.
     public List<CourseDTO> converCoursesToListDTO(List<Course> courses){
         List<CourseDTO> returnCoursesDTO = new ArrayList<>();
         courses.forEach(course ->{
@@ -135,14 +161,19 @@ public class CourseController {
         return returnCoursesDTO;
     }
 
+    // Usa ModelMapper para converter um Conteudo em Conteudo DTO.
     public CourseDTO convertCourseToDTO(Course course){
         return modelMapper.map(course, CourseDTO.class);
     }
+
+    // Usa ModelMapper para converter um Conteudo DTO em Conteudo.
     public Course converCourseToEntity(CourseDTO courseDTO){
         return modelMapper.map(courseDTO, Course.class);
     }
 
 
+
+    // Usa ModelMapper para converter uma lista de Conteudos em Conteudos String DTO.
     public List<CourseStingDTO> converCoursesStringToListDTO(List<Course> courses){
         List<CourseStingDTO> returnCoursesDTO = new ArrayList<>();
         courses.forEach(course ->{
@@ -156,6 +187,8 @@ public class CourseController {
         return returnCoursesDTO;
     }
 
+
+    // Usa ModelMapper para converter um conteudo em Conteudo String DTO.
     public CourseStingDTO convertCourseStringDTO(Course course){
         CourseStingDTO courseStingDTO = modelMapper.map(course, CourseStingDTO.class);
         CourseDTO courseDTO = modelMapper.map(course,CourseDTO.class);
@@ -166,6 +199,7 @@ public class CourseController {
     }
 
 
+    // Usa ModelMapper para converter um Conteudo String DTO em Conteudo
     public Course converCourseStringToEntity(CourseStingDTO courseStringDTO){
         CourseDTO courseDTO = new CourseDTO();
         courseDTO.setIdRoad(adminService.findIdRoadByName(courseStringDTO.getIdRoad()));
