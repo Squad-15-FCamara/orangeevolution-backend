@@ -113,6 +113,7 @@ public class StatisticAdminService {
         return statistic;
     }
 
+
     public List<StatisticDTO> findCourseByTitle(String title) {
         List<StatisticDTO> returnCourse = new ArrayList<>();
         courseRepository.findAll().forEach(course -> {
@@ -129,6 +130,5 @@ public class StatisticAdminService {
         validationException.ValidationExceptionList(returnCourse, title);
         return returnCourse;
     }
-
     
 }
