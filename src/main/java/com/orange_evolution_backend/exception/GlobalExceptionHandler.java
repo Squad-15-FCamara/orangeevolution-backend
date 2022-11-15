@@ -1,3 +1,5 @@
+//Objeto para captar as exceptions geradas no codigo
+
 package com.orange_evolution_backend.exception;
 
 
@@ -18,23 +20,27 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
     @Value("${enable.trace:#{false}}")
     private boolean enableTracer;
 
+
+    //Capta as exceptions quando não encontrar um conteudo
     @ExceptionHandler(CourseNotFoundException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<Object> handleCourseNotFoundException(CourseNotFoundException exception, WebRequest webRequest){
         return buildErrorResponse(exception, HttpStatus.BAD_REQUEST, webRequest);
     }
 
+    //Capta as exceptions quando disparar um NullPointException
     @ExceptionHandler(NullPointerException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<Object> handleException(NullPointerException exception,WebRequest webRequest){
         return buildErrorResponse(exception, "Cant be find", HttpStatus.BAD_REQUEST, webRequest);
     }
 
-
+    //Construtor para gerar as respostas personalizadas de erro
     private ResponseEntity<Object> buildErrorResponse(Exception exception, HttpStatus httpStatus, WebRequest webRequest){
         return buildErrorResponse(exception,exception.getMessage(), httpStatus, webRequest);
     }
 
+    //Construtor para gerar as respostas personalizadas de erro que é chamado
     private ResponseEntity<Object> buildErrorResponse(Exception exception,String message, HttpStatus httpStatus, WebRequest webRequest){
         ErrorResponse errorResponse = new ErrorResponse(httpStatus.value(), message);
 
