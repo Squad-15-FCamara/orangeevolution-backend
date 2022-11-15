@@ -1,3 +1,7 @@
+// Este é o objeto para salvar os Temas de conteudos, nele será salvo o Id, Nome, Trilha. 
+
+// Aqui também possui as tabelas relacionais de Temas com Usuários de em progesso e finalizada.
+
 package com.orange_evolution_backend.entity;
 
 import java.util.Collection;

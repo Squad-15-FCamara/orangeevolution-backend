@@ -1,3 +1,5 @@
+// Este é o objeto para salvar os Tipos de conteudos, nele será salvo o Id, Nome.
+
 package com.orange_evolution_backend.entity;
 
 import java.util.Collection;

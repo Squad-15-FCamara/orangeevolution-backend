@@ -1,3 +1,7 @@
+// Este é o objeto para salvar as Trilhas de conteudos, nele será salvo o Id, Nome. 
+
+// Aqui também possui as tabelas relacionais de Trilhas com Usuários de em progesso e finalizada.
+
 package com.orange_evolution_backend.entity;
 
 import java.util.Collection;
