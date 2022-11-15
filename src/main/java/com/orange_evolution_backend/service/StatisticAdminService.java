@@ -10,6 +10,7 @@ import com.orange_evolution_backend.repository.RoadRepoistory;
 import com.orange_evolution_backend.repository.ThemeRepository;
 import com.orange_evolution_backend.repository.UserRepository;
 import com.orange_evolution_backend.dto.StatisticDTO;
+import com.orange_evolution_backend.exception.ValidationException;
 
 import lombok.AllArgsConstructor;
 
@@ -21,6 +22,8 @@ public class StatisticAdminService {
     RoadRepoistory roadRepoistory;
     ThemeRepository themeRepository;
     AdminService adminService;
+    ValidationException validationException;
+    
     public Long counterUserDoing(Long idCourse) {
         return (long) courseRepository.findById(idCourse).get().getUserDoing().size();
     }
@@ -110,5 +113,22 @@ public class StatisticAdminService {
         return statistic;
     }
 
+
+    public List<StatisticDTO> findCourseByTitle(String title) {
+        List<StatisticDTO> returnCourse = new ArrayList<>();
+        courseRepository.findAll().forEach(course -> {
+            String local = course.getTitle().toLowerCase();
+            if (local.contains(title.toLowerCase())) {
+                String name = course.getTitle();
+                Long doing = counterUserDoing(course.getId());
+                Long done = counterUserDone(course.getId());
+                Long didnt = counterUserDidnt(course.getId());
+                StatisticDTO save = new StatisticDTO(name, doing, done, didnt);
+                returnCourse.add(save);
+            }
+        });
+        validationException.ValidationExceptionList(returnCourse, title);
+        return returnCourse;
+    }
     
 }
